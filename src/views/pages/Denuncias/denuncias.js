@@ -214,6 +214,7 @@ const Denuncias = () => {
                 onChange={handleEditChange}
               />
             </div>
+            // Prueba
             <div className="mb-3">
               <CFormInput
                 type="text"
