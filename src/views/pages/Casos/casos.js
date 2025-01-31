@@ -28,8 +28,18 @@ import {
   CFormSelect,
   CFormTextarea,
 } from '@coreui/react'
-import { cilPrint, cilSearch, cilFilter, cilBell, cilCheckCircle, cilX } from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
+import {
+  cilPrint,
+  cilSearch,
+  cilFilter,
+  cilBell,
+  cilCheckCircle,
+  cilX,
+  cilZoom,
+  cilXCircle,
+  cilPencil,
+} from '@coreui/icons'
+import { CIcon } from '@coreui/icons-react'
 
 import logo from '../../../assets/images/fondo/consejomunicipal.jpg'
 import { helpFetch } from '../../../api/helpFetch.js'
@@ -198,80 +208,87 @@ const casos = () => {
         <CModalBody>
           <CForm onSubmit={handleSubmit}>
             <div className="mb-4">
-              <CFormInput
-                id="titulo"
-                label="Título"
-                value={formData.titulo}
-                onChange={handleInputChange}
-                required
-              />
-              <CFormInput
-                id="fechaApertura"
-                label="Fecha"
-                type="date"
-                value={formData.fechaApertura}
-                onChange={handleInputChange}
-                required
-              />
-              <CFormSelect
-                id="estado"
-                label="Estado"
-                value={formData.estado}
-                onChange={handleInputChange}
-              >
-                <option value="Pendiente">Pendiente</option>
-                <option value="En Proceso">En Proceso</option>
-                <option value="Resuelto">Resuelto</option>
-              </CFormSelect>
-              <CFormTextarea
-                id="detalles"
-                label="Detalles"
-                rows="3"
-                value={formData.detalles}
-                onChange={handleInputChange}
-                required
-              />
-              <CFormSelect
-                id="tipoCaso"
-                label="Tipo caso"
-                value={formData.tipoCaso}
-                onChange={handleInputChange}
-              >
-                <option value="1">Delito grave</option>
-                <option value="2">Violencia</option>
-                <option value="3">Negligencia</option>
-              </CFormSelect>
-              <CFormInput
-                id="denunciante"
-                label="Denunciante"
-                value={formData.denunciante}
-                onChange={handleInputChange}
-                required
-              />
-              <CFormSelect
-                id="organismo"
-                label="Organismo"
-                value={formData.organismo}
-                onChange={handleInputChange}
-              >
-                <option value="1">Defensoria Municipal</option>
-                <option value="2">Defensoria Educativa</option>
-                <option value="3">Consejo de proteccion</option>
-              </CFormSelect>
-              <CFormInput
-                id="victima"
-                label="Victima"
-                value={formData.victima}
-                onChange={handleInputChange}
-                required
-              />
-              <CFormInput
-                id="funcionario"
-                label="Funcionario"
-                value={formData.funcionario}
-                onChange={handleInputChange}
-                required
-              />
+              <CRow>
+                <CCol md="6">
+                  <CFormInput
+                    id="titulo"
+                    label="Título"
+                    value={formData.titulo}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <CFormInput
+                    id="fechaApertura"
+                    label="Fecha"
+                    type="date"
+                    value={formData.fechaApertura}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <CFormSelect
+                    id="estado"
+                    label="Estado"
+                    value={formData.estado}
+                    onChange={handleInputChange}
+                  >
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="En Proceso">En Proceso</option>
+                    <option value="Resuelto">Resuelto</option>
+                  </CFormSelect>
+                  <CFormTextarea
+                    id="detalles"
+                    label="Detalles"
+                    rows="3"
+                    value={formData.detalles}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </CCol>
+                <CCol md="6">
+                  <CFormSelect
+                    id="tipoCaso"
+                    label="Tipo caso"
+                    value={formData.tipoCaso}
+                    onChange={handleInputChange}
+                  >
+                    <option value="1">Delito grave</option>
+                    <option value="2">Violencia</option>
+                    <option value="3">Negligencia</option>
+                  </CFormSelect>
+
+                  <CFormInput
+                    id="denunciante"
+                    label="Denunciante"
+                    value={formData.denunciante}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <CFormSelect
+                    id="organismo"
+                    label="Organismo"
+                    value={formData.organismo}
+                    onChange={handleInputChange}
+                  >
+                    <option value="1">Defensoria Municipal</option>
+                    <option value="2">Defensoria Educativa</option>
+                    <option value="3">Consejo de proteccion</option>
+                  </CFormSelect>
+                  <CFormInput
+                    id="victima"
+                    label="Victima"
+                    value={formData.victima}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <CFormInput
+                    id="funcionario"
+                    label="Funcionario"
+                    value={formData.funcionario}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </CCol>
+              </CRow>
             </div>
             <CButton color="primary" onClick={handleSubmit} className="me-2" type="submit">
               Guardar
@@ -374,8 +391,10 @@ const casos = () => {
         </CCol>
       </CRow>
       <CCard className="mb-4">
-        <CCardHeader>
-          <strong>Casos</strong>
+        <CCardHeader className="bg-primary text-white d-flex justify-content-between align-items-center">
+          <strong>
+            <h4 className="mb-0">Casos</h4>
+          </strong>
         </CCardHeader>
         <CCardBody>
           <CTable hover responsive>
@@ -398,12 +417,8 @@ const casos = () => {
                     <span className={`badge bg-${estadosColores[caso.estado]}`}>{caso.estado}</span>
                   </CTableDataCell>
                   <CTableDataCell>
-                    <CButton
-                      color="info"
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleShowDetails(caso)}
-                    >
+                    <CButton color="info" className="me-2" onClick={() => handleShowDetails(caso)}>
+                      <CIcon icon={cilZoom} className="me-1" />
                       Ver Detalles
                     </CButton>
                   </CTableDataCell>
@@ -496,12 +511,15 @@ const casos = () => {
         </CModalFooter>
         <CModalFooter>
           <CButton color="success" className="text-uppercase" style={{ width: '150px' }}>
+            <CIcon icon={cilPrint} className="me-1"></CIcon>
             Imprimir
           </CButton>
           <CButton color="warning" onClick={() => set}>
+            <CIcon icon={cilPencil} className="me-1" />
             Editar
           </CButton>
           <CButton color="danger" onClick={() => setVisible(false)}>
+            <CIcon icon={cilXCircle} className="me-1"></CIcon>
             Cerrar
           </CButton>
         </CModalFooter>

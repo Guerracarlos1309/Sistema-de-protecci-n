@@ -23,16 +23,6 @@
       "departamento": "Oficina",
       "email": "Carlos@gmail.com",
       "cedula": "31419488"
-    },
-    {
-      "id": "e84e",
-      "nombre": "Daniel",
-      "apellido": "Bermudez",
-      "cedula": "17207905",
-      "cargo": "Administradora",
-      "telefono": "04245874512",
-      "email": "daniel@gmail.coms",
-      "departamento": "Defensoría"
     }
   ],
   "casos": [
@@ -126,6 +116,19 @@
       "funcionario": "",
       "tipoCaso": "",
       "victima": ""
+    },
+    {
+      "id": "9847",
+      "titulo": "Mataron a un inocente",
+      "fechaApertura": "2025-01-27",
+      "fechaCierre": "",
+      "estado": "En Proceso",
+      "detalles": "Mataron a daniel",
+      "denunciante": "Yo",
+      "organismo": "3",
+      "funcionario": "jennifer Pulido",
+      "tipoCaso": "",
+      "victima": "Daniel"
     }
   ],
   "expediente": [
@@ -180,7 +183,7 @@
       "edad": 14,
       "caso": "Maltrato físico",
       "fechaApertura": "2024-07-01",
-      "fechaCierre": "",
+      "fechaCierre": "1212-12-12",
       "estado": "En Proceso"
     },
     {
@@ -189,7 +192,7 @@
       "edad": 13,
       "caso": "Violencia doméstica",
       "fechaApertura": "2024-08-05",
-      "fechaCierre": "",
+      "fechaCierre": "1212-12-12",
       "estado": "Resuelto"
     },
     {
@@ -198,7 +201,7 @@
       "edad": 11,
       "caso": "Negligencia severa",
       "fechaApertura": "2024-08-15",
-      "fechaCierre": "",
+      "fechaCierre": "2025-01-27",
       "estado": "Resuelto"
     },
     {
@@ -207,7 +210,7 @@
       "edad": 7,
       "caso": "Abandono y maltrato",
       "fechaApertura": "2024-09-01",
-      "fechaCierre": "",
+      "fechaCierre": "2025-01-28",
       "estado": "En Proceso"
     },
     {
@@ -216,7 +219,7 @@
       "edad": 12,
       "caso": "Violencia física",
       "fechaApertura": "2024-09-20",
-      "fechaCierre": "",
+      "fechaCierre": "2025-01-31",
       "estado": "Pendiente"
     },
     {
@@ -227,6 +230,26 @@
       "fechaApertura": "2025-01-24",
       "fechaCierre": "2025-01-24",
       "estado": "En Proceso"
+    },
+    {
+      "id": "6d84",
+      "nombre": "Carlos Guerra",
+      "edad": "25",
+      "caso": "Negligencia",
+      "fechaApertura": "2025-01-30",
+      "fechaCierre": "2025-01-30",
+      "status": "",
+      "estado": "En Proceso"
+    },
+    {
+      "id": "45d5",
+      "nombre": "Daniel",
+      "edad": "12",
+      "caso": "Negligencia",
+      "fechaApertura": "1212-12-12",
+      "fechaCierre": "2025-01-28",
+      "status": "",
+      "estado": "Resuelto"
     }
   ],
   "denuncias": [
@@ -234,31 +257,35 @@
       "id": "1",
       "titulo": "Denuncia 1",
       "fecha": "2023-05-01",
-      "denunciante": "Carlos Guerra"
+      "denunciante": "Carlos Guerra",
+      "nombre": "Ana Torres",
+      "cedula": "17207905",
+      "direccion": "cordero",
+      "telefono": "12211212",
+      "email": "Carlos@gmail.com",
+      "motivo": "Porque si"
     },
     {
       "id": "2",
       "titulo": "Denuncia 2",
-      "fecha": "2023-05-02",
-      "denunciante": "Carlos Guerra"
+      "fecha": "2023-06-15",
+      "denunciante": "Luis Méndez",
+      "nombre": "Raúl Fernández",
+      "cedula": "20987654",
+      "direccion": "Michelena",
+      "telefono": "04149876543",
+      "email": "luis@gmail.com"
     },
     {
       "id": "3",
       "titulo": "Denuncia 3",
-      "fecha": "2023-05-03",
-      "denunciante": "Carlos Guerra"
-    },
-    {
-      "id": "4",
-      "titulo": "Denuncia 4",
-      "fecha": "2023-05-04",
-      "denunciante": "Carlos Guerra"
-    },
-    {
-      "id": "5",
-      "titulo": "Denuncia 5",
-      "fecha": "2023-05-05",
-      "denunciante": "Carlos Guerra"
+      "fecha": "2023-07-20",
+      "denunciante": "Andrea Salazar",
+      "nombre": "José Rivas",
+      "cedula": "18765432",
+      "direccion": "Palmira",
+      "telefono": "04141237890",
+      "email": "andrea@gmail.com"
     }
   ],
   "reportes": [
@@ -266,49 +293,100 @@
       "id": "1",
       "titulo": "Informe sobre situación de abuso infantil",
       "fecha": "2023-01-10",
-      "descripcion": "Informe detallado sobre los casos de abuso infantil en la región y las acciones tomadas."
+      "descripcion": "Informe detallado sobre los casos de abuso infantil en la región y las acciones tomadas.",
+      "tipoReporte": "Abandono",
+      "estado": "Abierto"
     },
     {
       "id": "2",
       "titulo": "Reporte de atención a niños en situación de calle",
       "fecha": "2023-02-15",
-      "descripcion": "Reporte sobre los esfuerzos de atención y rehabilitación de niños y niñas en situación de calle."
+      "descripcion": "Reporte sobre los esfuerzos de atención y rehabilitación de niños y niñas en situación de calle.",
+      "tipoReporte": "Abandono",
+      "estado": "Abierto"
     },
     {
       "id": "3",
       "titulo": "Evaluación de programas educativos para niños vulnerables",
       "fecha": "2023-03-20",
-      "descripcion": "Análisis sobre la efectividad de los programas educativos implementados para niños en riesgo."
+      "descripcion": "Análisis sobre la efectividad de los programas educativos implementados para niños en riesgo.",
+      "tipoReporte": "Abandono",
+      "estado": "Abierto"
     },
     {
       "id": "4",
       "titulo": "Reporte sobre la violencia escolar y medidas preventivas",
       "fecha": "2023-04-05",
-      "descripcion": "Reporte sobre los incidentes de violencia escolar y las medidas implementadas para prevenir futuros casos."
+      "descripcion": "Reporte sobre los incidentes de violencia escolar y las medidas implementadas para prevenir futuros casos.",
+      "tipoReporte": "Abandono",
+      "estado": "Activo"
     },
     {
       "id": "5",
       "titulo": "Monitoreo de condiciones de los centros de acogida infantil",
       "fecha": "2023-05-12",
-      "descripcion": "Informe sobre las condiciones de los centros de acogida infantil y las mejoras necesarias."
+      "descripcion": "Informe sobre las condiciones de los centros de acogida infantil y las mejoras necesarias.",
+      "tipoReporte": "Abandono",
+      "estado": "Activo"
     },
     {
       "id": "6",
       "titulo": "Análisis sobre el acceso a servicios de salud para niños y adolescentes",
       "fecha": "2023-06-18",
-      "descripcion": "Estudio sobre el acceso y la calidad de los servicios de salud disponibles para niños y adolescentes vulnerables."
+      "descripcion": "Estudio sobre el acceso y la calidad de los servicios de salud disponibles para niños y adolescentes vulnerables.",
+      "tipoReporte": "Abandono",
+      "estado": "Activo"
     },
     {
       "id": "7",
       "titulo": "Reporte de seguimiento a casos de adopción",
       "fecha": "2023-07-22",
-      "descripcion": "Informe sobre el estado de los casos de adopción en curso y las familias adoptivas."
+      "descripcion": "Informe sobre el estado de los casos de adopción en curso y las familias adoptivas.",
+      "tipoReporte": "Abandono",
+      "estado": "Activo"
     },
     {
       "id": "8",
       "titulo": "Evaluación de políticas públicas de protección infantil",
       "fecha": "2023-08-09",
-      "descripcion": "Análisis sobre la implementación y efectividad de las políticas públicas dirigidas a la protección de la infancia y adolescencia."
+      "descripcion": "Análisis sobre la implementación y efectividad de las políticas públicas dirigidas a la protección de la infancia y adolescencia.",
+      "tipoReporte": "Abandono",
+      "estado": "Activo"
+    }
+  ],
+  "promociones": [
+    {
+      "id": "1",
+      "titulo": "Campaña de Vacunación",
+      "descripcion": "Campaña de vacunación para niños y adolescentes",
+      "fecha": "2025-01-15",
+      "lugar": "Centro Comunitario San José",
+      "beneficiarios": "Niños de 0-12 años",
+      "estado": "Activo",
+      "tipoPromo": "3",
+      "funcionario": "2"
+    },
+    {
+      "id": "ce71",
+      "titulo": "asdsadsda",
+      "descripcion": "asdsdasad",
+      "fecha": "1212-12-12",
+      "lugar": "asdsadasd",
+      "beneficiarios": "Menores 10 años",
+      "estado": "Activo",
+      "tipoPromo": "3",
+      "funcionario": "2"
+    },
+    {
+      "id": "ea6b",
+      "titulo": "Vacunacion",
+      "descripcion": "Vacunacion para los menores de 10 años",
+      "fecha": "2025-01-31",
+      "lugar": "Alcaldia",
+      "beneficiarios": "Menores 10 años",
+      "estado": "Activo",
+      "tipoPromo": "1",
+      "funcionario": "1"
     }
   ]
 }

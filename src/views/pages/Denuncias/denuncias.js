@@ -18,7 +18,9 @@ import {
   CFormTextarea,
 } from '@coreui/react'
 import { helpFetch } from '../../../api/helpFetch.js'
-
+import logo from '../../../assets/images/fondo/consejomunicipal.jpg'
+import { cilXCircle, cilZoom } from '@coreui/icons'
+import { CIcon } from '@coreui/icons-react'
 const api = helpFetch()
 
 const Denuncias = () => {
@@ -33,12 +35,10 @@ const Denuncias = () => {
     fecha: '',
   })
 
-  // Load complaints when component mounts
   useEffect(() => {
     loadDenuncias()
   }, [])
 
-  // Fetch complaints from API
   const loadDenuncias = () => {
     api
       .get('denuncias')
@@ -52,13 +52,11 @@ const Denuncias = () => {
       })
   }
 
-  // Open info modal
   const handleMoreInfo = (denuncia) => {
     setSelectedDenuncia(denuncia)
     setIsInfoModalOpen(true)
   }
 
-  // Open edit modal
   const handleEdit = (denuncia) => {
     setSelectedDenuncia(denuncia)
     setEditForm({
@@ -70,7 +68,6 @@ const Denuncias = () => {
     setIsEditModalOpen(true)
   }
 
-  // Handle edit form changes
   const handleEditChange = (e) => {
     const { name, value } = e.target
     setEditForm((prev) => ({
@@ -79,13 +76,11 @@ const Denuncias = () => {
     }))
   }
 
-  // Submit edited complaint
   const handleEditSubmit = () => {
     if (selectedDenuncia) {
       api
         .put(`denuncias/${selectedDenuncia.id}`, editForm)
         .then((updatedDenuncia) => {
-          // Update the list of complaints
           setDenuncias((prev) =>
             prev.map((d) => (d.id === selectedDenuncia.id ? updatedDenuncia : d)),
           )
@@ -97,7 +92,6 @@ const Denuncias = () => {
     }
   }
 
-  // Delete a complaint
   const handleDelete = (id) => {
     if (window.confirm('¿Está seguro que desea eliminar esta denuncia?')) {
       api
@@ -113,9 +107,24 @@ const Denuncias = () => {
 
   return (
     <>
+      <div className="mb-4 position-relative">
+        <h2
+          className="text-center position-relative pb-3"
+          style={{
+            fontFamily: 'Arial, sans-serif',
+            color: '#4a4a4a',
+            borderBottom: '3px solid',
+            borderImage: 'linear-gradient(to right, transparent, #4a4a4a, transparent) 1',
+          }}
+        >
+          Gestion de denuncias
+        </h2>
+      </div>
       <CCard>
-        <CCardHeader>
-          <h2>Lista de Denuncias</h2>
+        <CCardHeader className="bg-primary text-white d-flex justify-content-between align-items-center">
+          <strong>
+            <h4 className="mb-0">Lista de Denuncias</h4>
+          </strong>
         </CCardHeader>
         <CCardBody>
           <CListGroup>
@@ -132,27 +141,16 @@ const Denuncias = () => {
                 </div>
 
                 <div>
-                  <CButton
-                    color="primary"
-                    variant="outline"
-                    className="me-2"
-                    onClick={() => handleEdit(denuncia)}
-                  >
-                    Editar
-                  </CButton>
-                  <CButton
-                    color="info"
-                    variant="outline"
-                    className="me-2"
-                    onClick={() => handleMoreInfo(denuncia)}
-                  >
+                  <CButton color="info" className="me-1" onClick={() => handleMoreInfo(denuncia)}>
+                    <CIcon icon={cilZoom} size="sm" className="me-1" />
                     Más Info
                   </CButton>
                   <CButton
                     color="danger"
-                    variant="outline"
+                    className="me-1"
                     onClick={() => handleDelete(denuncia.id)}
                   >
+                    <CIcon icon={cilXCircle} className="me-1"></CIcon>
                     Eliminar
                   </CButton>
                 </div>
@@ -162,85 +160,79 @@ const Denuncias = () => {
         </CCardBody>
       </CCard>
 
-      {/* Info Modal */}
       <CModal visible={isInfoModalOpen} onClose={() => setIsInfoModalOpen(false)}>
         <CModalHeader>
           <CModalTitle>Detalles de la Denuncia</CModalTitle>
-        </CModalHeader>
-        <CModalBody>
-          {selectedDenuncia && (
-            <>
-              <h4>{selectedDenuncia.titulo}</h4>
-              <p>
-                <strong>Fecha:</strong> {selectedDenuncia.fecha}
-              </p>
-              <p>
-                <strong>Denunciante:</strong> {selectedDenuncia.denunciante}
-              </p>
-              <p>
-                <strong>Descripción:</strong> {selectedDenuncia.descripcion}
-              </p>
-            </>
-          )}
-        </CModalBody>
-        <CModalFooter>
-          <CButton color="secondary" onClick={() => setIsInfoModalOpen(false)}>
-            Cerrar
-          </CButton>
-        </CModalFooter>
-      </CModal>
 
-      {/* Edit Modal */}
-      <CModal visible={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
-        <CModalHeader>
-          <CModalTitle>Editar Denuncia</CModalTitle>
+          <div style={{ paddingRight: '0' }}>
+            <img
+              className="d-flex justify-content-between align-items-right"
+              src={logo}
+              alt="Logo"
+              style={{ width: '120px', height: 'auto', marginLeft: '80%' }}
+            />
+          </div>
         </CModalHeader>
-        <CModalBody>
-          <CForm>
-            <div className="mb-3">
-              <CFormInput
-                type="text"
-                name="titulo"
-                label="Título"
-                value={editForm.titulo}
-                onChange={handleEditChange}
-              />
-            </div>
-            <div className="mb-3">
-              <CFormTextarea
-                name="descripcion"
-                label="Descripción"
-                value={editForm.descripcion}
-                onChange={handleEditChange}
-              />
-            </div>
-            // Prueba
-            <div className="mb-3">
-              <CFormInput
-                type="text"
-                name="denunciante"
-                label="Denunciante"
-                value={editForm.denunciante}
-                onChange={handleEditChange}
-              />
-            </div>
-            <div className="mb-3">
-              <CFormInput
-                type="date"
-                name="fecha"
-                label="Fecha"
-                value={editForm.fecha}
-                onChange={handleEditChange}
-              />
-            </div>
-          </CForm>
-        </CModalBody>
+        {selectedDenuncia ? (
+          <CModalBody>
+            <CCard className="p-3 shadow-sm">
+              <CCardBody>
+                <CRow className="mb-2">
+                  <CCol>
+                    <p className="mb-1">
+                      <strong>Titulo:</strong> {selectedDenuncia.titulo}
+                    </p>
+                    <p className="mb-1">
+                      <strong>Fecha:</strong> {selectedDenuncia.fecha}
+                    </p>
+                  </CCol>
+                </CRow>
+                <CRow className="mb-2">
+                  <CCol>
+                    <p className="mb-1">
+                      <strong>Denunciante:</strong> {selectedDenuncia.denunciante}
+                    </p>
+                  </CCol>
+                </CRow>
+
+                <CRow className="mb-2">
+                  <CCol>
+                    <p className="mb-1">
+                      <strong>Dirección:</strong> {selectedDenuncia.direccion}
+                    </p>
+                  </CCol>
+                </CRow>
+                <CRow className="mb-2">
+                  <CCol>
+                    <p className="mb-1">
+                      <strong>Teléfono:</strong> {selectedDenuncia.telefono}
+                    </p>
+                  </CCol>
+                </CRow>
+                <CRow className="mb-2">
+                  <CCol>
+                    <p className="mb-1">
+                      <strong>Email:</strong> {selectedDenuncia.email}
+                    </p>
+                  </CCol>
+                </CRow>
+                <CRow className="mb-2">
+                  <CCol>
+                    <p className="mb-1">
+                      <strong>Motivos:</strong> {selectedDenuncia.motivo}
+                    </p>
+                  </CCol>
+                </CRow>
+              </CCardBody>
+            </CCard>
+          </CModalBody>
+        ) : (
+          <p>No se seleccionó ninguna denuncia.</p>
+        )}
+
         <CModalFooter>
-          <CButton color="secondary" onClick={() => setIsEditModalOpen(false)}>
-            Cancelar
-          </CButton>
-          <CButton color="primary" onClick={handleEditSubmit}>
-            Guardar Cambios
+          <CButton color="danger" className="me-1" onClick={() => setIsInfoModalOpen(false)}>
+            Cerrar
           </CButton>
         </CModalFooter>
       </CModal>

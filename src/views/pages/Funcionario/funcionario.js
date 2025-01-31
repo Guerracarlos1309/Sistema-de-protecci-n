@@ -309,9 +309,12 @@ const funcionario = () => {
         </CModalFooter>
       </CModal>
       <CCard className="mb-4">
-        <CCardHeader>
+        <CCardHeader className="bg-primary text-white d-flex justify-content-between align-items-center">
           <strong>
-            Gestión de los funcionarios del Sistema de protección de los niños, niñas y Adolescentes
+            <h4 className="mb-0">
+              Gestión de los funcionarios del Sistema de protección de los niños, niñas y
+              Adolescentes
+            </h4>
           </strong>
         </CCardHeader>
         <CCardBody>
@@ -352,9 +355,8 @@ const funcionario = () => {
                     <CTableDataCell>
                       <div className="d-flex align-items-center gap-2">
                         <CButton
-                          color="success"
-                          variant="outline"
-                          size="sm"
+                          color="warning"
+                          className="me-1"
                           onClick={() => handleEditClick(funcionario)}
                         >
                           <CIcon icon={cilPencil} className="me-1" />
@@ -363,8 +365,7 @@ const funcionario = () => {
 
                         <CButton
                           color="danger"
-                          variant="outline"
-                          size="sm"
+                          className="me-1"
                           onClick={() => handleDeleteClick(funcionario.id)}
                         >
                           <CIcon icon={cilXCircle} className="me-1"></CIcon>
