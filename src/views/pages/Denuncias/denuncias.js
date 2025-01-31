@@ -16,11 +16,14 @@ import {
   CForm,
   CFormInput,
   CFormTextarea,
+  CTableRow,
+  CTableDataCell,
 } from '@coreui/react'
 import { helpFetch } from '../../../api/helpFetch.js'
 import logo from '../../../assets/images/fondo/consejomunicipal.jpg'
 import { cilXCircle, cilZoom } from '@coreui/icons'
 import { CIcon } from '@coreui/icons-react'
+import { array } from 'prop-types'
 const api = helpFetch()
 
 const Denuncias = () => {
@@ -43,7 +46,7 @@ const Denuncias = () => {
     api
       .get('denuncias')
       .then((data) => {
-        if (!data.error) {
+        if (!data.error && Array.isArray(data)) {
           setDenuncias(data)
         }
       })
@@ -128,34 +131,42 @@ const Denuncias = () => {
         </CCardHeader>
         <CCardBody>
           <CListGroup>
-            {denuncias.map((denuncia) => (
-              <CListGroupItem
-                key={denuncia.id}
-                className="d-flex justify-content-between align-items-center"
-              >
-                <div>
-                  <h5>{denuncia.titulo}</h5>
-                  <small>Fecha: {denuncia.fecha}</small>
-                  <br />
-                  <small>Denunciante: {denuncia.denunciante}</small>
-                </div>
+            {denuncias.length > 0 ? (
+              denuncias.map((denuncia) => (
+                <CListGroupItem
+                  key={denuncia.id}
+                  className="d-flex justify-content-between align-items-center"
+                >
+                  <div>
+                    <h5>{denuncia.titulo}</h5>
+                    <small>Fecha: {denuncia.fecha}</small>
+                    <br />
+                    <small>Denunciante: {denuncia.denunciante}</small>
+                  </div>
 
-                <div>
-                  <CButton color="info" className="me-1" onClick={() => handleMoreInfo(denuncia)}>
-                    <CIcon icon={cilZoom} size="sm" className="me-1" />
-                    Más Info
-                  </CButton>
-                  <CButton
-                    color="danger"
-                    className="me-1"
-                    onClick={() => handleDelete(denuncia.id)}
-                  >
-                    <CIcon icon={cilXCircle} className="me-1"></CIcon>
-                    Eliminar
-                  </CButton>
-                </div>
-              </CListGroupItem>
-            ))}
+                  <div>
+                    <CButton color="info" className="me-1" onClick={() => handleMoreInfo(denuncia)}>
+                      <CIcon icon={cilZoom} size="sm" className="me-1" />
+                      Más Info
+                    </CButton>
+                    <CButton
+                      color="danger"
+                      className="me-1"
+                      onClick={() => handleDelete(denuncia.id)}
+                    >
+                      <CIcon icon={cilXCircle} className="me-1"></CIcon>
+                      Eliminar
+                    </CButton>
+                  </div>
+                </CListGroupItem>
+              ))
+            ) : (
+              <CTableRow>
+                <CTableDataCell colSpan="5" className="text-center">
+                  No se encontraron Expedientes.
+                </CTableDataCell>
+              </CTableRow>
+            )}
           </CListGroup>
         </CCardBody>
       </CCard>
@@ -173,6 +184,7 @@ const Denuncias = () => {
             />
           </div>
         </CModalHeader>
+
         {selectedDenuncia ? (
           <CModalBody>
             <CCard className="p-3 shadow-sm">
@@ -227,7 +239,9 @@ const Denuncias = () => {
             </CCard>
           </CModalBody>
         ) : (
-          <p>No se seleccionó ninguna denuncia.</p>
+          <CModalBody>
+            <p>No se seleccionó ninguna denuncia.</p>
+          </CModalBody>
         )}
 
         <CModalFooter>

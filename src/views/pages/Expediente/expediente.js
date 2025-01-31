@@ -77,7 +77,7 @@ const Expediente = () => {
 
   const loadExpedientes = () => {
     api.get('expediente').then((data) => {
-      if (!data.error) {
+      if (!data.error && Array.isArray(data)) {
         setExpedientes(data)
         setFilteredExpediente(data)
       }
@@ -216,7 +216,7 @@ const Expediente = () => {
                   ) : (
                     <CTableRow>
                       <CTableDataCell colSpan="5" className="text-center">
-                        No se encontraron resultados.
+                        No se encontraron Expedientes.
                       </CTableDataCell>
                     </CTableRow>
                   )}

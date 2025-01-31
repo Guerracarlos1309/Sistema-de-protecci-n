@@ -17,6 +17,8 @@ import {
   CFormLabel,
   CFormSelect,
   CBadge,
+  CTableRow,
+  CTableDataCell,
 } from '@coreui/react'
 import { cilPrint, cilPencil, cilXCircle } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
@@ -51,7 +53,7 @@ const promociones = () => {
 
   const loadPromocion = () => {
     api.get('promociones').then((data) => {
-      if (!data.error) {
+      if (!data.error && Array.isArray(data)) {
         setPromociones(data)
       }
     })
@@ -129,37 +131,45 @@ const promociones = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {promociones.map((promociones) => (
-                      <tr key={promociones.id}>
-                        <td>{promociones.titulo}</td>
-                        <td>{promociones.fecha}</td>
-                        <td>{promociones.lugar}</td>
-                        <td>{promociones.beneficiarios}</td>
-                        <td>
-                          <span
-                            className={`badge ${promociones.estado === 'Activo' ? 'bg-success' : 'bg-secondary'}`}
-                          >
-                            {promociones.estado}
-                          </span>
-                        </td>
-                        <td>
-                          <div className="d-flex gap-2">
-                            <CButton
-                              color="info"
-                              className="me-1"
-                              onClick={() => openModal(promociones)}
+                    {promociones.length > 0 ? (
+                      promociones.map((promociones) => (
+                        <tr key={promociones.id}>
+                          <td>{promociones.titulo}</td>
+                          <td>{promociones.fecha}</td>
+                          <td>{promociones.lugar}</td>
+                          <td>{promociones.beneficiarios}</td>
+                          <td>
+                            <span
+                              className={`badge ${promociones.estado === 'Activo' ? 'bg-success' : 'bg-secondary'}`}
                             >
-                              <CIcon icon={cilPencil} className="me-1" />
-                              Detalles
-                            </CButton>
-                            <CButton color="danger" size="sm" className="me-1">
-                              <CIcon icon={cilXCircle} className="me-1"></CIcon>
-                              Delete
-                            </CButton>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
+                              {promociones.estado}
+                            </span>
+                          </td>
+                          <td>
+                            <div className="d-flex gap-2">
+                              <CButton
+                                color="info"
+                                className="me-1"
+                                onClick={() => openModal(promociones)}
+                              >
+                                <CIcon icon={cilPencil} className="me-1" />
+                                Detalles
+                              </CButton>
+                              <CButton color="danger" size="sm" className="me-1">
+                                <CIcon icon={cilXCircle} className="me-1"></CIcon>
+                                Delete
+                              </CButton>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <CTableRow>
+                        <CTableDataCell colSpan="5" className="text-center">
+                          No se encontraron Promociones.
+                        </CTableDataCell>
+                      </CTableRow>
+                    )}
                   </tbody>
                 </table>
               </div>

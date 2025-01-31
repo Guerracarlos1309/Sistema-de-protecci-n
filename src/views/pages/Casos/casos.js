@@ -77,7 +77,7 @@ const casos = () => {
 
   const loadCasos = () => {
     api.get('casos').then((data) => {
-      if (!data.error) {
+      if (!data.error && Array.isArray(data)) {
         setCasos(data)
       }
     })
@@ -408,22 +408,36 @@ const casos = () => {
               </CTableRow>
             </CTableHead>
             <CTableBody>
-              {casosPaginados.map((caso) => (
-                <CTableRow key={caso.id}>
-                  <CTableDataCell>{caso.id}</CTableDataCell>
-                  <CTableDataCell>{caso.titulo}</CTableDataCell>
-                  <CTableDataCell>{caso.fechaApertura}</CTableDataCell>
-                  <CTableDataCell>
-                    <span className={`badge bg-${estadosColores[caso.estado]}`}>{caso.estado}</span>
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    <CButton color="info" className="me-2" onClick={() => handleShowDetails(caso)}>
-                      <CIcon icon={cilZoom} className="me-1" />
-                      Ver Detalles
-                    </CButton>
+              {casosPaginados.length > 0 ? (
+                casosPaginados.map((caso) => (
+                  <CTableRow key={caso.id}>
+                    <CTableDataCell>{caso.id}</CTableDataCell>
+                    <CTableDataCell>{caso.titulo}</CTableDataCell>
+                    <CTableDataCell>{caso.fechaApertura}</CTableDataCell>
+                    <CTableDataCell>
+                      <span className={`badge bg-${estadosColores[caso.estado]}`}>
+                        {caso.estado}
+                      </span>
+                    </CTableDataCell>
+                    <CTableDataCell>
+                      <CButton
+                        color="info"
+                        className="me-2"
+                        onClick={() => handleShowDetails(caso)}
+                      >
+                        <CIcon icon={cilZoom} className="me-1" />
+                        Ver Detalles
+                      </CButton>
+                    </CTableDataCell>
+                  </CTableRow>
+                ))
+              ) : (
+                <CTableRow>
+                  <CTableDataCell colSpan="5" className="text-center">
+                    No se encontraron Casos
                   </CTableDataCell>
                 </CTableRow>
-              ))}
+              )}
             </CTableBody>
           </CTable>
 

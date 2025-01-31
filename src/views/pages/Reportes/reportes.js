@@ -52,11 +52,13 @@ const Reportes = () => {
   }
 
   const filterReportes = () => {
-    const lowerSearch = search.toLowerCase()
-    const filtered = reportes.filter((reporte) =>
-      reporte.titulo.toLowerCase().includes(lowerSearch),
-    )
-    setFilteredReportes(filtered)
+    if (Array.isArray(reportes)) {
+      const lowerSearch = search.toLowerCase()
+      const filtered = reportes.filter((reporte) =>
+        reporte.titulo.toLowerCase().includes(lowerSearch),
+      )
+      setFilteredReportes(filtered)
+    }
   }
 
   const openDetailModal = (reporte) => {
@@ -134,7 +136,7 @@ const Reportes = () => {
                   ) : (
                     <CTableRow>
                       <CTableDataCell colSpan="5" className="text-center">
-                        No se encontraron resultados.
+                        No se encontraron Reportes
                       </CTableDataCell>
                     </CTableRow>
                   )}
