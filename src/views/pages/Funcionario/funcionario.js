@@ -114,7 +114,7 @@ const funcionario = () => {
 
   const loadFuncionarios = () => {
     api.get('funcionarios').then((data) => {
-      if (!data.error) {
+      if (!data.error && Array.isArray(data)) {
         setFuncionarios(data)
       }
     })
