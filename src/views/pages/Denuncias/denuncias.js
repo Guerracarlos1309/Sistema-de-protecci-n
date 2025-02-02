@@ -23,7 +23,6 @@ import { helpFetch } from '../../../api/helpFetch.js'
 import logo from '../../../assets/images/fondo/consejomunicipal.jpg'
 import { cilXCircle, cilZoom } from '@coreui/icons'
 import { CIcon } from '@coreui/icons-react'
-import { array } from 'prop-types'
 const api = helpFetch()
 
 const Denuncias = () => {
@@ -44,7 +43,7 @@ const Denuncias = () => {
 
   const loadDenuncias = () => {
     api
-      .get('denuncias')
+      .get('/denuncias')
       .then((data) => {
         if (!data.error && Array.isArray(data)) {
           setDenuncias(data)
@@ -82,7 +81,7 @@ const Denuncias = () => {
   const handleEditSubmit = () => {
     if (selectedDenuncia) {
       api
-        .put(`denuncias/${selectedDenuncia.id}`, editForm)
+        .put(`/denuncias/${selectedDenuncia.id}`, editForm)
         .then((updatedDenuncia) => {
           setDenuncias((prev) =>
             prev.map((d) => (d.id === selectedDenuncia.id ? updatedDenuncia : d)),
@@ -98,7 +97,7 @@ const Denuncias = () => {
   const handleDelete = (id) => {
     if (window.confirm('¿Está seguro que desea eliminar esta denuncia?')) {
       api
-        .delete(`denuncias/${id}`)
+        .delete(`/denuncias/${id}`)
         .then(() => {
           setDenuncias((prev) => prev.filter((d) => d.id !== id))
         })

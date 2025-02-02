@@ -76,7 +76,7 @@ const Expediente = () => {
   }, [])
 
   const loadExpedientes = () => {
-    api.get('expediente').then((data) => {
+    api.get('/expediente').then((data) => {
       if (!data.error && Array.isArray(data)) {
         setExpedientes(data)
         setFilteredExpediente(data)
@@ -86,7 +86,7 @@ const Expediente = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    api.post('expediente', { body: formData }).then((response) => {
+    api.post('/expediente', { body: formData }).then((response) => {
       if (!response.error) {
         loadExpedientes()
         setFormData({
@@ -112,7 +112,7 @@ const Expediente = () => {
 
     const id = selectedExpediente.id
     console.log('Guardando expediente:', formData, selectedExpediente)
-    api.put('expediente', { body: formData }, id).then((response) => {
+    api.put('/expediente', { body: formData }, id).then((response) => {
       if (!response.error) {
         loadExpedientes()
         setEditVisible(false)

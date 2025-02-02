@@ -50,7 +50,7 @@ const funcionario = () => {
   })
 
   const handleButtonClick = () => {
-    api.post('funcionarios', { body: newFuncionario }).then((response) => {
+    api.post('/funcionarios', { body: newFuncionario }).then((response) => {
       if (!response.error) {
         setVisible(false)
         setVisibleSave(true)
@@ -74,7 +74,7 @@ const funcionario = () => {
   }
 
   const confirmDelete = () => {
-    api.delet('funcionarios', selectedFuncionario).then((response) => {
+    api.delet('/funcionarios', selectedFuncionario).then((response) => {
       if (!response.error) {
         loadFuncionarios()
         setDeleteModal(false)
@@ -95,7 +95,7 @@ const funcionario = () => {
   }
 
   const confirmEdit = () => {
-    api.put('funcionarios', { body: formData }, selectedFuncionario).then((response) => {
+    api.put('/funcionarios', { body: formData }, selectedFuncionario).then((response) => {
       if (!response.error) {
         loadFuncionarios()
         setEditModal(false)

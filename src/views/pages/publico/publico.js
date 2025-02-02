@@ -85,7 +85,7 @@ const ProtectionSystem = () => {
   }
 
   const handleSubmit = () => {
-    api.post('denuncias', { body: newDenuncia }).then((response) => {
+    api.post('/denuncias', { body: newDenuncia }).then((response) => {
       if (!response.error) {
         setModalVisible(false)
         setNewDenuncia({

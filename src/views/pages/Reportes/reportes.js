@@ -43,7 +43,7 @@ const Reportes = () => {
   }, [search, reportes])
 
   const loadReportes = () => {
-    api.get('reportes').then((data) => {
+    api.get('/reportes').then((data) => {
       if (!data.error) {
         setReportes(data)
         setFilteredReportes(data)

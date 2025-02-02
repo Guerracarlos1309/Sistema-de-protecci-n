@@ -76,7 +76,7 @@ const casos = () => {
   }, [])
 
   const loadCasos = () => {
-    api.get('casos').then((data) => {
+    api.get('/casos').then((data) => {
       if (!data.error && Array.isArray(data)) {
         setCasos(data)
       }
@@ -113,7 +113,7 @@ const casos = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    api.post('casos', { body: formData }).then((response) => {
+    api.post('/casos', { body: formData }).then((response) => {
       if (!response.error) {
         loadCasos()
         setFormData({

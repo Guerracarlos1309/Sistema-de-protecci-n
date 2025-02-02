@@ -52,7 +52,7 @@ const promociones = () => {
   }, [])
 
   const loadPromocion = () => {
-    api.get('promociones').then((data) => {
+    api.get('/promociones').then((data) => {
       if (!data.error && Array.isArray(data)) {
         setPromociones(data)
       }
@@ -61,7 +61,7 @@ const promociones = () => {
   const [showModal, setShowModal] = useState(false)
 
   const handleSubmit = (e) => {
-    api.post('promociones', { body: newPromocionn }).then((response) => {
+    api.post('/promociones', { body: newPromocionn }).then((response) => {
       if (!response.error) {
         setShowModal(false)
         loadPromocion()
