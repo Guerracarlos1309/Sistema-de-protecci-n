@@ -286,6 +286,18 @@
       "direccion": "Palmira",
       "telefono": "04141237890",
       "email": "andrea@gmail.com"
+    },
+    {
+      "id": "",
+      "titulo": "",
+      "fecha": "",
+      "denunciante": "",
+      "nombre": "",
+      "cedula": "",
+      "telefono": "",
+      "email": "",
+      "motivo": "",
+      "direccion": ""
     }
   ],
   "reportes": [
@@ -387,6 +399,14 @@
       "estado": "Activo",
       "tipoPromo": "1",
       "funcionario": "1"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "cc94",
+      "username": "guerrita",
+      "email": "guerracarlos1309@gmail.com",
+      "password": "123"
     }
   ]
 }
