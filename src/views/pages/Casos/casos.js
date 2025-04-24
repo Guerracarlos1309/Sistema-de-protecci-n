@@ -38,6 +38,7 @@ import {
   cilZoom,
   cilXCircle,
   cilPencil,
+  cilLibraryAdd,
 } from '@coreui/icons'
 import { CIcon } from '@coreui/icons-react'
 
@@ -197,6 +198,7 @@ const casos = () => {
           color="primary"
           onClick={() => setAddModalVisible(true)}
         >
+          <CIcon icon={cilLibraryAdd} className="me-2" />
           Agregar Caso
         </CButton>
       </div>
@@ -231,6 +233,7 @@ const casos = () => {
                     value={formData.estado}
                     onChange={handleInputChange}
                   >
+                    <option value="">Estado del caso</option>
                     <option value="Pendiente">Pendiente</option>
                     <option value="En Proceso">En Proceso</option>
                     <option value="Resuelto">Resuelto</option>
@@ -251,6 +254,9 @@ const casos = () => {
                     value={formData.tipoCaso}
                     onChange={handleInputChange}
                   >
+                    <option value="placeholder" dissable selected>
+                      Tipo de caso
+                    </option>
                     <option value="1">Delito grave</option>
                     <option value="2">Violencia</option>
                     <option value="3">Negligencia</option>
@@ -269,6 +275,9 @@ const casos = () => {
                     value={formData.organismo}
                     onChange={handleInputChange}
                   >
+                    <option value="placeholder" dissable selected>
+                      Organismo responsable
+                    </option>
                     <option value="1">Defensoria Municipal</option>
                     <option value="2">Defensoria Educativa</option>
                     <option value="3">Consejo de proteccion</option>
@@ -280,13 +289,19 @@ const casos = () => {
                     onChange={handleInputChange}
                     required
                   />
-                  <CFormInput
+                  <CFormSelect
                     id="funcionario"
                     label="Funcionario"
                     value={formData.funcionario}
                     onChange={handleInputChange}
-                    required
-                  />
+                  >
+                    <option value="placeholder" dissable selected>
+                      Funcionario responsable
+                    </option>
+                    <option value="Jennifer Pulido">Jennifer Pulido</option>
+                    <option value="Jennifer Guerrero">Jennifer Guerrero</option>
+                    <option value="Daniela Lozano">Daniela Lozano</option>
+                  </CFormSelect>
                 </CCol>
               </CRow>
             </div>
@@ -301,7 +316,7 @@ const casos = () => {
         <CModalHeader closeButton>
           <CModalTitle>Éxito</CModalTitle>
         </CModalHeader>
-        <CModalBody>Usuario agregado con éxito.</CModalBody>
+        <CModalBody>Caso agregado con éxito.</CModalBody>
         <CModalFooter>
           <CButton color="secondary" onClick={() => setConfirmationModalVisible(false)}>
             Cerrar

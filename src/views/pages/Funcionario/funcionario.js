@@ -20,7 +20,7 @@ import {
   CCardHeader,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilUserPlus, cilPencil, cilXCircle } from '@coreui/icons'
+import { cilUserPlus, cilPencil, cilXCircle, cilSearch } from '@coreui/icons'
 import { helpFetch } from '../../../api/helpFetch.js'
 
 const api = helpFetch()
@@ -323,6 +323,7 @@ const funcionario = () => {
               <CIcon icon={cilUserPlus} className="me-2" />
               Nuevo Funcionario
             </CButton>
+
             <CFormInput
               type="text"
               placeholder="Buscar por Cedula de identidad"

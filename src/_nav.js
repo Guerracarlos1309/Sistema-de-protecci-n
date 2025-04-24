@@ -12,6 +12,13 @@ import {
   cilPuzzle,
   cilSpeedometer,
   cilStar,
+  cilBriefcase,
+  cilChild,
+  cilLibraryAdd,
+  cilUser,
+  cilTag,
+  cilLibrary,
+  cilShieldAlt,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -30,25 +37,25 @@ const _nav = [
     component: CNavItem,
     name: 'Funcionario',
     to: 'funcionario',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Casos',
     to: 'casos',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilBriefcase} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Expediente',
     to: 'expediente',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilChild} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Promociones',
     to: 'promociones',
-    icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilTag} customClassName="nav-icon" />,
   },
 
   {
@@ -60,31 +67,13 @@ const _nav = [
     component: CNavItem,
     name: 'Reportes',
     to: 'reportes',
-    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilLibrary} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
     name: 'Denuncias',
     to: 'denuncias',
-    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
-  },
-
-  {
-    component: CNavTitle,
-    name: 'Extras',
-  },
-
-  {
-    component: CNavItem,
-    name: 'Login',
-    to: '/login',
-    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Register',
-    to: '/register',
-    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilBell} customClassName="nav-icon" />,
   },
 ]
 

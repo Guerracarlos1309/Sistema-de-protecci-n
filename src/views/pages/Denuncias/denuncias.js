@@ -148,11 +148,7 @@ const Denuncias = () => {
                       <CIcon icon={cilZoom} size="sm" className="me-1" />
                       Más Info
                     </CButton>
-                    <CButton
-                      color="danger"
-                      className="me-1"
-                      onClick={() => handleDelete(denuncia.id)}
-                    >
+                    <CButton color="danger" className="me-1">
                       <CIcon icon={cilXCircle} className="me-1"></CIcon>
                       Eliminar
                     </CButton>

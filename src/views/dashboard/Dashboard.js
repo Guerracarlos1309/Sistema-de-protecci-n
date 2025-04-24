@@ -1,13 +1,8 @@
-import React from 'react'
-import classNames from 'classnames'
-
+import React, { useEffect, useState } from 'react'
 import {
   CAvatar,
-  CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
-  CCardFooter,
   CCardHeader,
   CCol,
   CProgress,
@@ -19,6 +14,9 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
+import { CChartBar, CChartDoughnut } from '@coreui/react-chartjs'
+import { helpFetch } from '../../api/helpFetch.js'
+
 import CIcon from '@coreui/icons-react'
 import {
   cibCcAmex,
@@ -27,20 +25,13 @@ import {
   cibCcPaypal,
   cibCcStripe,
   cibCcVisa,
-  cibGoogle,
-  cibFacebook,
-  cibLinkedin,
   cifBr,
   cifEs,
   cifFr,
   cifIn,
   cifPl,
   cifUs,
-  cibTwitter,
-  cilCloudDownload,
   cilPeople,
-  cilUser,
-  cilUserFemale,
 } from '@coreui/icons'
 
 import avatar1 from 'src/assets/images/avatars/1.jpg'
@@ -53,8 +44,53 @@ import avatar6 from 'src/assets/images/avatars/6.jpg'
 import WidgetsBrand from '../widgets/WidgetsBrand'
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import MainChart from './MainChart'
+const api = helpFetch()
 
 const Dashboard = () => {
+  const [casos, setCasos] = useState([])
+  const [funcionarios, setFuncionarios] = useState([])
+  const [expedientes, setExpedientes] = useState([])
+
+  useEffect(() => {
+    loadCasos(), loadFuncionarios(), loadExpedientes()
+  })
+
+  const loadFuncionarios = () => {
+    api.get('/funcionarios').then((data) => {
+      if (!data.error && Array.isArray(data)) {
+        setFuncionarios(data)
+      }
+    })
+  }
+  const loadExpedientes = () => {
+    api.get('/expedientes').then((data) => {
+      if (!data.error && Array.isArray(data)) {
+        setExpedientes(data)
+      }
+    })
+  }
+  const loadCasos = () => {
+    api.get('/casos').then((data) => {
+      if (!data.error && Array.isArray(data)) {
+        setCasos(data)
+      }
+    })
+  }
+
+  const totalCasos = casos.length
+  const casosResueltos = casos.filter((c) => c.estado === 'Resuelto').length
+  const casosPendientes = casos.filter((c) => c.estado === 'Pendiente').length
+
+  const tiposDeCaso = casos.reduce((acc, curr) => {
+    acc[curr.tipoCaso] = (acc[curr.tipoCaso] || 0) + 1
+    return acc
+  }, {})
+
+  const expedientesPorEstado = expedientes.reduce((acc, curr) => {
+    acc[curr.estado] = (acc[curr.estado] || 0) + 1
+    return acc
+  }, {})
+
   const tableExample = [
     {
       avatar: { src: avatar1, status: 'success' },
@@ -145,13 +181,100 @@ const Dashboard = () => {
       activity: 'Last week',
     },
   ]
-
   return (
-    <>
+    <div>
+      <div className="mb-4 position-relative">
+        <h2
+          className="text-center position-relative pb-3"
+          style={{
+            fontFamily: 'Arial, sans-serif',
+            color: '#4a4a4a',
+            borderBottom: '3px solid',
+            borderImage: 'linear-gradient(to right, transparent, #4a4a4a, transparent) 1',
+          }}
+        >
+          Panel de control
+        </h2>
+      </div>
       <CRow>
+        <CCol xs={12} md={6}>
+          <CCard className="mb-4">
+            <CCardHeader className="bg-primary text-white d-flex justify-content-between align-items-center">
+              Resumen de Casos
+            </CCardHeader>
+            <CCardBody>
+              <p>Total: {totalCasos}</p>
+              <p>Resueltos: {casosResueltos}</p>
+              <p>Pendientes: {casosPendientes}</p>
+            </CCardBody>
+          </CCard>
+        </CCol>
+
+        <CCol xs={12} md={6}>
+          <CCard className="mb-4">
+            <CCardHeader className="bg-primary text-white d-flex justify-content-between align-items-center">
+              Funcionarios Registrados
+            </CCardHeader>
+            <CCardBody>
+              <h3>{funcionarios.length}</h3>
+            </CCardBody>
+          </CCard>
+        </CCol>
+
+        <CCol xs={12} md={6}>
+          <CCard className="mb-4">
+            <CCardHeader className="bg-primary text-white d-flex justify-content-between align-items-center">
+              Tipos de Caso
+            </CCardHeader>
+            <CCardBody>
+              <CChartDoughnut
+                data={{
+                  labels: Object.keys(tiposDeCaso),
+                  datasets: [
+                    {
+                      data: Object.values(tiposDeCaso),
+                      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+                    },
+                  ],
+                }}
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
+
+        <CCol xs={12} md={6}>
+          <CCard className="mb-4">
+            <CCardHeader className="bg-primary text-white d-flex justify-content-between align-items-center">
+              Estado de Expedientes
+            </CCardHeader>
+            <CCardBody>
+              <CChartBar
+                data={{
+                  labels: Object.keys(expedientesPorEstado),
+                  datasets: [
+                    {
+                      label: 'Cantidad',
+                      backgroundColor: '#42A5F5',
+                      data: Object.values(expedientesPorEstado),
+                    },
+                  ],
+                }}
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: { display: false },
+                  },
+                }}
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
+
         <CCol xs>
           <CCard className="mb-4">
-            <CCardHeader>Traffic {' & '} Sales</CCardHeader>
+            <CCardHeader className="bg-primary text-white d-flex justify-content-between align-items-center">
+              Lista de usuarios
+            </CCardHeader>
             <CCardBody>
               <br />
 
@@ -166,9 +289,7 @@ const Dashboard = () => {
                       Country
                     </CTableHeaderCell>
                     <CTableHeaderCell className="bg-body-tertiary">Usage</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary text-center">
-                      Payment Method
-                    </CTableHeaderCell>
+
                     <CTableHeaderCell className="bg-body-tertiary">Activity</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
@@ -197,9 +318,7 @@ const Dashboard = () => {
                         </div>
                         <CProgress thin color={item.usage.color} value={item.usage.value} />
                       </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.payment.icon} />
-                      </CTableDataCell>
+
                       <CTableDataCell>
                         <div className="small text-body-secondary text-nowrap">Last login</div>
                         <div className="fw-semibold text-nowrap">{item.activity}</div>
@@ -212,7 +331,7 @@ const Dashboard = () => {
           </CCard>
         </CCol>
       </CRow>
-    </>
+    </div>
   )
 }
 

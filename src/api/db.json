@@ -15,14 +15,6 @@
       "departamento": "Defensora",
       "email": "maria@gmail.com",
       "cedula": "31419488"
-    },
-    {
-      "id": "3",
-      "nombre": "Carlos Rodríguez",
-      "cargo": "Admin",
-      "departamento": "Oficina",
-      "email": "Carlos@gmail.com",
-      "cedula": "31419488"
     }
   ],
   "casos": [
@@ -116,19 +108,6 @@
       "funcionario": "",
       "tipoCaso": "",
       "victima": ""
-    },
-    {
-      "id": "9847",
-      "titulo": "Mataron a un inocente",
-      "fechaApertura": "2025-01-27",
-      "fechaCierre": "",
-      "estado": "En Proceso",
-      "detalles": "Mataron a daniel",
-      "denunciante": "Yo",
-      "organismo": "3",
-      "funcionario": "jennifer Pulido",
-      "tipoCaso": "",
-      "victima": "Daniel"
     }
   ],
   "expediente": [
@@ -148,7 +127,7 @@
       "caso": "Maltrato",
       "fechaApertura": "2024-05-16",
       "fechaCierre": "2024-08-20",
-      "estado": "Pendiente"
+      "estado": "Resuelto"
     },
     {
       "id": "3",
