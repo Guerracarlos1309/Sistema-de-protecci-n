@@ -285,9 +285,7 @@ const Dashboard = () => {
                       <CIcon icon={cilPeople} />
                     </CTableHeaderCell>
                     <CTableHeaderCell className="bg-body-tertiary">User</CTableHeaderCell>
-                    <CTableHeaderCell className="bg-body-tertiary text-center">
-                      Country
-                    </CTableHeaderCell>
+
                     <CTableHeaderCell className="bg-body-tertiary">Usage</CTableHeaderCell>
 
                     <CTableHeaderCell className="bg-body-tertiary">Activity</CTableHeaderCell>
@@ -306,9 +304,7 @@ const Dashboard = () => {
                           {item.user.registered}
                         </div>
                       </CTableDataCell>
-                      <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
-                      </CTableDataCell>
+
                       <CTableDataCell>
                         <div className="d-flex justify-content-between text-nowrap">
                           <div className="fw-semibold">{item.usage.value}%</div>
