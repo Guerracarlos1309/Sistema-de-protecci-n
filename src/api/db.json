@@ -297,6 +297,18 @@
       "telefono": "12211212",
       "email": "Carlos@gmail.com",
       "motivo": "Porque si"
+    },
+    {
+      "id": "15b2",
+      "titulo": "mataron a daniel",
+      "fecha": "2025-07-07",
+      "denunciante": "carlos Guerra",
+      "nombre": "",
+      "cedula": "31419488",
+      "telefono": "04247842726",
+      "email": "dani12@sad",
+      "motivo": "car",
+      "direccion": "tachira"
     }
   ],
   "reportes": [
