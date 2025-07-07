@@ -32,6 +32,7 @@ const promociones = () => {
 
   const [promociones, setPromociones] = useState([])
   const [promocionSeleccionada, setPromocionSeleccionada] = useState(null)
+  const [deleteModal, setDeleteModal] = useState(false)
   const [newPromocionn, setNewPromocionn] = useState({
     titulo: '',
     descripcion: '',
@@ -86,6 +87,28 @@ const promociones = () => {
     })
   }
 
+  const handleDelete = () => {
+    api
+      .delet('/promociones', promocionSeleccionada.id)
+      .then((response) => {
+        if (!response.error) {
+          loadPromocion()
+          setDeleteModal(false)
+          setPromocionSeleccionada(null)
+        } else {
+          console.error('Error eliminando promocion:', response)
+        }
+      })
+      .catch((error) => {
+        console.error('Error eliminando promocnion:', error)
+      })
+  }
+
+  const handleDeleteClick = (promociones) => {
+    setPromocionSeleccionada(promociones)
+    setDeleteModal(true)
+  }
+
   return (
     <div className="p-4">
       <div className="mb-4 position-relative">
@@ -132,8 +155,12 @@ const promociones = () => {
                   </thead>
                   <tbody>
                     {promociones.length > 0 ? (
-                      promociones.map((promociones) => (
+                      promociones.map((promociones, index) => (
                         <tr key={promociones.id}>
+                          <td>
+                            {' '}
+                            <strong>{index + 1}</strong>
+                          </td>
                           <td>{promociones.titulo}</td>
                           <td>{promociones.fecha}</td>
                           <td>{promociones.lugar}</td>
@@ -155,9 +182,14 @@ const promociones = () => {
                                 <CIcon icon={cilPencil} className="me-1" />
                                 Detalles
                               </CButton>
-                              <CButton color="danger" size="sm" className="me-1">
+                              <CButton
+                                color="danger"
+                                size="sm"
+                                className="me-1"
+                                onClick={() => handleDeleteClick(promociones)}
+                              >
                                 <CIcon icon={cilXCircle} className="me-1"></CIcon>
-                                Delete
+                                Eliminar
                               </CButton>
                             </div>
                           </td>
@@ -376,6 +408,21 @@ const promociones = () => {
           <CButton color="success" className="me-2">
             <CIcon icon={cilPrint} size="sm" />
             Imprimir
+          </CButton>
+        </CModalFooter>
+      </CModal>
+
+      <CModal visible={deleteModal} onClose={() => setDeleteModal(false)}>
+        <CModalHeader>
+          <CModalTitle>Confirmar Eliminación</CModalTitle>
+        </CModalHeader>
+        <CModalBody>¿Estás seguro de que deseas eliminar esta denuncia?</CModalBody>
+        <CModalFooter>
+          <CButton color="secondary" onClick={() => setDeleteModal(false)}>
+            Cancelar
+          </CButton>
+          <CButton color="danger" onClick={handleDelete}>
+            Confirmar
           </CButton>
         </CModalFooter>
       </CModal>

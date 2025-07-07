@@ -170,6 +170,7 @@ const Expediente = () => {
               <CTable hover responsive>
                 <CTableHead>
                   <CTableRow>
+                    <CTableHeaderCell>#</CTableHeaderCell>
                     <CTableHeaderCell>Nombre</CTableHeaderCell>
                     <CTableHeaderCell>Edad</CTableHeaderCell>
                     <CTableHeaderCell>Caso</CTableHeaderCell>
@@ -181,8 +182,11 @@ const Expediente = () => {
                 </CTableHead>
                 <CTableBody>
                   {filteredExpediente.length > 0 ? (
-                    filteredExpediente.map((expediente) => (
+                    filteredExpediente.map((expediente, index) => (
                       <CTableRow key={expediente.id}>
+                        <CTableDataCell>
+                          <strong>{index + 1}</strong>
+                        </CTableDataCell>
                         <CTableDataCell>{expediente.nombre}</CTableDataCell>
                         <CTableDataCell>{expediente.edad}</CTableDataCell>
                         <CTableDataCell>{expediente.caso}</CTableDataCell>

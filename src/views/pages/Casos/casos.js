@@ -49,7 +49,6 @@ const api = helpFetch()
 
 const casos = () => {
   const [visible, setVisible] = useState(false)
-  const [visibleSave, setVisibleSave] = useState(false)
   const [selectedCaso, setSelectedCaso] = useState(null)
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
@@ -58,6 +57,8 @@ const casos = () => {
   const [confirmationModalVisible, setConfirmationModalVisible] = useState(false)
   const itemsPerPage = 5
   const [casos, setCasos] = useState([])
+  const [editModalVisible, setEditModalVisible] = useState(false)
+  const [editConfirmationModalVisible, setEditConfirmationModalVisible] = useState(false)
 
   const [formData, setFormData] = useState({
     titulo: '',
@@ -71,6 +72,61 @@ const casos = () => {
     tipoCaso: '',
     victima: '',
   })
+
+  const [editFormData, setEditFormData] = useState({
+    id: '',
+    titulo: '',
+    fechaApertura: '',
+    fechaCierre: '',
+    estado: 'Pendiente',
+    detalles: '',
+    denunciante: '',
+    organismo: '',
+    funcionario: '',
+    tipoCaso: '',
+    victima: '',
+  })
+
+  const handleEditCase = (caso) => {
+    setEditFormData({
+      id: caso.id,
+      titulo: caso.titulo,
+      fechaApertura: caso.fechaApertura,
+      fechaCierre: caso.fechaCierre || '',
+      estado: caso.estado,
+      detalles: caso.detalles,
+      denunciante: caso.denunciante,
+      organismo: caso.organismo,
+      funcionario: caso.funcionario,
+      tipoCaso: caso.tipoCaso,
+      victima: caso.victima,
+    })
+
+    setEditModalVisible(true)
+    setVisible(false)
+  }
+
+  const handleEditSubmit = (e) => {
+    e.preventDefault()
+
+    const id = editFormData.id
+
+    api.put('/casos', { body: editFormData }, id).then((response) => {
+      if (!response.error) {
+        loadCasos()
+        setEditModalVisible(false)
+        setEditConfirmationModalVisible(true)
+        setVisible(false)
+      } else {
+        console.error('Error actualizando caso:', response)
+      }
+    })
+  }
+
+  const handleEditInputChange = (e) => {
+    const { id, value } = e.target
+    setEditFormData({ ...editFormData, [id]: value })
+  }
 
   useEffect(() => {
     loadCasos()
@@ -232,6 +288,7 @@ const casos = () => {
                     label="Estado"
                     value={formData.estado}
                     onChange={handleInputChange}
+                    required
                   >
                     <option value="">Estado del caso</option>
                     <option value="Pendiente">Pendiente</option>
@@ -424,9 +481,12 @@ const casos = () => {
             </CTableHead>
             <CTableBody>
               {casosPaginados.length > 0 ? (
-                casosPaginados.map((caso) => (
+                casosPaginados.map((caso, index) => (
                   <CTableRow key={caso.id}>
-                    <CTableDataCell>{caso.id}</CTableDataCell>
+                    <CTableDataCell>
+                      {' '}
+                      <strong>{(currentPage - 1) * itemsPerPage + index + 1}</strong>
+                    </CTableDataCell>
                     <CTableDataCell>{caso.titulo}</CTableDataCell>
                     <CTableDataCell>{caso.fechaApertura}</CTableDataCell>
                     <CTableDataCell>
@@ -543,11 +603,142 @@ const casos = () => {
             <CIcon icon={cilPrint} className="me-1"></CIcon>
             Imprimir
           </CButton>
-          <CButton color="warning" onClick={() => set}>
+          <CButton color="warning" onClick={() => handleEditCase(selectedCaso)}>
             <CIcon icon={cilPencil} className="me-1" />
             Editar
           </CButton>
           <CButton color="danger" onClick={() => setVisible(false)}>
+            <CIcon icon={cilXCircle} className="me-1"></CIcon>
+            Cerrar
+          </CButton>
+        </CModalFooter>
+      </CModal>
+
+      <CModal visible={editModalVisible} onClose={() => setEditModalVisible(false)} size="lg">
+        <CModalHeader closeButton>
+          <CModalTitle>Editar Caso</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <CForm onSubmit={handleEditSubmit}>
+            <div className="mb-4">
+              <CRow>
+                <CCol md="6">
+                  <CFormInput
+                    id="titulo"
+                    label="Título"
+                    value={editFormData.titulo}
+                    onChange={handleEditInputChange}
+                    required
+                  />
+                  <CFormInput
+                    id="fechaApertura"
+                    label="Fecha Apertura"
+                    type="date"
+                    value={editFormData.fechaApertura}
+                    onChange={handleEditInputChange}
+                    required
+                  />
+                  <CFormInput
+                    id="fechaCierre"
+                    label="Fecha Cierre"
+                    type="date"
+                    value={editFormData.fechaCierre}
+                    onChange={handleEditInputChange}
+                  />
+                  <CFormSelect
+                    id="estado"
+                    label="Estado"
+                    value={editFormData.estado}
+                    onChange={handleEditInputChange}
+                  >
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="En Proceso">En Proceso</option>
+                    <option value="Resuelto">Resuelto</option>
+                  </CFormSelect>
+                  <CFormTextarea
+                    id="detalles"
+                    label="Detalles"
+                    rows="3"
+                    value={editFormData.detalles}
+                    onChange={handleEditInputChange}
+                    required
+                  />
+                </CCol>
+                <CCol md="6">
+                  <CFormSelect
+                    id="tipoCaso"
+                    label="Tipo caso"
+                    value={editFormData.tipoCaso}
+                    onChange={handleEditInputChange}
+                  >
+                    <option value="">Tipo de caso</option>
+                    <option value="1">Delito grave</option>
+                    <option value="2">Violencia</option>
+                    <option value="3">Negligencia</option>
+                  </CFormSelect>
+                  <CFormInput
+                    id="denunciante"
+                    label="Denunciante"
+                    value={editFormData.denunciante}
+                    onChange={handleEditInputChange}
+                    required
+                  />
+                  <CFormSelect
+                    id="organismo"
+                    label="Organismo"
+                    value={editFormData.organismo}
+                    onChange={handleEditInputChange}
+                  >
+                    <option value="">Organismo responsable</option>
+                    <option value="1">Defensoria Municipal</option>
+                    <option value="2">Defensoria Educativa</option>
+                    <option value="3">Consejo de proteccion</option>
+                  </CFormSelect>
+                  <CFormInput
+                    id="victima"
+                    label="Victima"
+                    value={editFormData.victima}
+                    onChange={handleEditInputChange}
+                    required
+                  />
+                  <CFormSelect
+                    id="funcionario"
+                    label="Funcionario"
+                    value={editFormData.funcionario}
+                    onChange={handleEditInputChange}
+                  >
+                    <option value="">Funcionario responsable</option>
+                    <option value="Jennifer Pulido">Jennifer Pulido</option>
+                    <option value="Jennifer Guerrero">Jennifer Guerrero</option>
+                    <option value="Daniela Lozano">Daniela Lozano</option>
+                  </CFormSelect>
+                </CCol>
+              </CRow>
+            </div>
+          </CForm>
+        </CModalBody>
+        <CModalFooter>
+          <CButton color="success" onClick={handleEditSubmit}>
+            <CIcon icon={cilCheckCircle} className="me-1"></CIcon>
+            Guardar Cambios
+          </CButton>
+          <CButton color="danger" onClick={() => setEditModalVisible(false)}>
+            <CIcon icon={cilXCircle} className="me-1"></CIcon>
+            Cerrar
+          </CButton>
+        </CModalFooter>
+      </CModal>
+
+      <CModal
+        visible={editConfirmationModalVisible}
+        onClose={() => setEditConfirmationModalVisible(false)}
+      >
+        <CModalHeader closeButton>
+          <CModalTitle>Éxito</CModalTitle>
+        </CModalHeader>
+        <CModalBody>Caso editado con éxito.</CModalBody>
+        <CModalFooter>
+          <CButton color="danger" onClick={() => setEditConfirmationModalVisible(false)}>
             <CIcon icon={cilXCircle} className="me-1"></CIcon>
             Cerrar
           </CButton>

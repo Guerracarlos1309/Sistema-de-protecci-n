@@ -337,7 +337,8 @@ const funcionario = () => {
               <CTableRow>
                 <CTableHeaderCell scope="col">#</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Documento de Identidad</CTableHeaderCell>
-                <CTableHeaderCell scope="col">Nombre y Apellido</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Nombre y apellido</CTableHeaderCell>
+
                 <CTableHeaderCell scope="col">Cargo</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Departamento</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Acciones</CTableHeaderCell>
@@ -349,7 +350,12 @@ const funcionario = () => {
                   <CTableRow key={funcionario.id}>
                     <CTableHeaderCell scope="row">{funcionario.id}</CTableHeaderCell>
                     <CTableDataCell>{funcionario.cedula}</CTableDataCell>
-                    <CTableDataCell>{funcionario.nombre}</CTableDataCell>
+                    <CTableDataCell>
+                      {funcionario.nombre && funcionario.apellido
+                        ? `${funcionario.nombre} ${funcionario.apellido}`
+                        : ''}
+                    </CTableDataCell>
+
                     <CTableDataCell>{funcionario.cargo}</CTableDataCell>
 
                     <CTableDataCell>{funcionario.departamento}</CTableDataCell>

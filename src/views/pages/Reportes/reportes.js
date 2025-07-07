@@ -109,9 +109,9 @@ const Reportes = () => {
                 </CTableHead>
                 <CTableBody>
                   {filteredReportes.length > 0 ? (
-                    filteredReportes.map((reporte) => (
+                    filteredReportes.map((reporte, index) => (
                       <CTableRow key={reporte.id}>
-                        <CTableHeaderCell scope="row">{reporte.id}</CTableHeaderCell>
+                        <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
                         <CTableDataCell>{reporte.titulo}</CTableDataCell>
                         <CTableDataCell>{reporte.fecha}</CTableDataCell>
                         <CTableDataCell>

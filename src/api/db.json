@@ -1,64 +1,66 @@
 {
   "funcionarios": [
     {
-      "id": "1",
-      "nombre": "Juan Pérez",
-      "cargo": "Defensora Municipalaaaaaa",
+      "id": 1,
+      "nombre": "Juan Alberto",
+      "cargo": "Defensora Municipal",
       "departamento": "Defensoría",
       "email": "juangarcia@gmail.com",
-      "cedula": "31419485"
+      "cedula": "31419485",
+      "apellido": "Perez"
     },
     {
-      "id": "2",
-      "nombre": "María González",
+      "id": 2,
+      "nombre": "María ",
       "cargo": "Defensora Educativa",
       "departamento": "Defensora",
       "email": "maria@gmail.com",
-      "cedula": "31419488"
+      "cedula": "31419488",
+      "apellido": "González"
     }
   ],
   "casos": [
     {
-      "id": "1",
+      "id": 1,
       "titulo": "Abandono Escolar",
       "fechaApertura": "2025-01-10",
       "fechaCierre": "2025-01-11",
       "estado": "Pendiente",
       "detalles": "El menor ha dejado de asistir a clases durante dos semanas consecutivas.",
-      "tipoCaso": "Caso de negligencia",
       "denunciante": "Juan Ramirez",
-      "victima": "daniel",
       "organismo": "Defensoria municipal",
-      "funcionario": "Jennifer Pulido"
+      "funcionario": "Jennifer Pulido",
+      "tipoCaso": "Caso de negligencia",
+      "victima": "daniel"
     },
     {
-      "id": "2",
+      "id": 2,
       "titulo": "Maltrato físico",
       "fechaApertura": "2025-01-12",
       "fechaCierre": "2025-01-15",
       "estado": "Resuelto",
       "detalles": "El menor presentó signos visibles de agresión física.",
-      "tipoCaso": "Caso de abuso",
       "denunciante": "María González",
-      "victima": "Sofía",
       "organismo": "Procuraduría estatal",
-      "funcionario": "Carlos López"
+      "funcionario": "Carlos López",
+      "tipoCaso": "Caso de abuso",
+      "victima": "Sofía"
     },
     {
-      "id": "3",
+      "id": 3,
       "titulo": "Negligencia Médica",
       "fechaApertura": "2025-01-16",
       "fechaCierre": "2025-01-20",
       "estado": "Resuelto",
       "detalles": "El menor no recibió atención médica adecuada en tiempo oportuno.",
-      "tipoCaso": "Caso de negligencia",
       "denunciante": "Luis Martínez",
-      "victima": "Lucas",
       "organismo": "Defensoría de derechos humanos",
-      "funcionario": "Ana Pérez"
+      "funcionario": "Ana Pérez",
+      "tipoCaso": "Caso de negligencia",
+      "victima": "Lucasito"
     },
     {
-      "id": "4",
+      "id": 4,
       "titulo": "Trabajo Infantil",
       "fechaApertura": "2025-01-08",
       "fechaCierre": "2025-01-18",
@@ -71,7 +73,7 @@
       "funcionario": "Fernando Sánchez"
     },
     {
-      "id": "5",
+      "id": 5,
       "titulo": "Falta de Inscripción Escolar",
       "fechaApertura": "2025-01-05",
       "fechaCierre": "2025-01-10",
@@ -84,7 +86,7 @@
       "funcionario": "Rafael Gómez"
     },
     {
-      "id": "b4fe",
+      "id": 6,
       "titulo": "Acoso escolar ",
       "fechaApertura": "2025-01-24",
       "fechaCierre": "",
@@ -97,8 +99,60 @@
       "victima": "Juan Pulido"
     },
     {
-      "id": "7e1f",
-      "titulo": "Mataron a un inocente",
+      "id": 7,
+      "titulo": "Acoso",
+      "fechaApertura": "2025-07-10",
+      "fechaCierre": "",
+      "estado": "Pendiente",
+      "detalles": "acoso",
+      "denunciante": "carlos",
+      "organismo": "1",
+      "funcionario": "Jennifer Pulido",
+      "tipoCaso": "1",
+      "victima": "juan"
+    },
+    {
+      "id": 8,
+      "titulo": "jauniot",
+      "fechaApertura": "2025-07-04",
+      "fechaCierre": "",
+      "estado": "Pendiente",
+      "detalles": "hola",
+      "denunciante": "carlos",
+      "organismo": "1",
+      "funcionario": "Jennifer Pulido",
+      "tipoCaso": "1",
+      "victima": "juan"
+    },
+    {
+      "id": 9,
+      "titulo": "asdsasadas",
+      "fechaApertura": "2025-07-04",
+      "fechaCierre": "",
+      "estado": "Pendiente",
+      "detalles": "hola",
+      "denunciante": "carlos",
+      "organismo": "1",
+      "funcionario": "Jennifer Pulido",
+      "tipoCaso": "1",
+      "victima": "juan"
+    },
+    {
+      "id": "e3b4",
+      "titulo": "asdsasadas",
+      "fechaApertura": "2025-07-11",
+      "fechaCierre": "",
+      "estado": "En Proceso",
+      "detalles": "12",
+      "denunciante": "12",
+      "organismo": "3",
+      "funcionario": "Daniela Lozano",
+      "tipoCaso": "2",
+      "victima": "12"
+    },
+    {
+      "id": "1f59",
+      "titulo": "",
       "fechaApertura": "",
       "fechaCierre": "",
       "estado": "Pendiente",
@@ -112,97 +166,97 @@
   ],
   "expediente": [
     {
-      "id": "1",
+      "id": 1,
       "nombre": "Juan Pérez",
-      "edad": 12,
+      "edad": "12",
       "caso": "Abandono",
       "fechaApertura": "2024-05-16",
       "fechaCierre": "2024-08-20",
       "estado": "Resuelto"
     },
     {
-      "id": "2",
+      "id": 2,
       "nombre": "María García",
-      "edad": 15,
+      "edad": "15",
       "caso": "Maltrato",
       "fechaApertura": "2024-05-16",
       "fechaCierre": "2024-08-20",
       "estado": "Resuelto"
     },
     {
-      "id": "3",
+      "id": 3,
       "nombre": "Carlos López",
-      "edad": 8,
+      "edad": "9",
       "caso": "Negligencia",
       "fechaApertura": "2024-05-16",
       "fechaCierre": "2024-08-20",
       "estado": "Pendiente"
     },
     {
-      "id": "4",
+      "id": 4,
       "nombre": "Ana Torres",
-      "edad": 10,
+      "edad": "10",
       "caso": "Abuso psicológico",
       "fechaApertura": "2024-06-01",
       "fechaCierre": "2024-09-15",
       "estado": "En Proceso"
     },
     {
-      "id": "5",
+      "id": 5,
       "nombre": "Luis Martínez",
-      "edad": 9,
+      "edad": "9",
       "caso": "Abandono",
       "fechaApertura": "2024-06-10",
-      "fechaCierre": "",
+      "fechaCierre": "2025-07-06",
       "estado": "Resuelto"
     },
     {
-      "id": "6",
+      "id": 6,
       "nombre": "Sofía Ramírez",
-      "edad": 14,
+      "edad": "14",
       "caso": "Maltrato físico",
       "fechaApertura": "2024-07-01",
       "fechaCierre": "1212-12-12",
       "estado": "En Proceso"
     },
     {
-      "id": "7",
+      "id": 7,
       "nombre": "Diego Fernández",
-      "edad": 13,
+      "edad": "13",
       "caso": "Violencia doméstica",
       "fechaApertura": "2024-08-05",
       "fechaCierre": "1212-12-12",
       "estado": "Resuelto"
     },
     {
-      "id": "8",
+      "id": 8,
       "nombre": "Elena Morales",
-      "edad": 11,
+      "edad": "11",
       "caso": "Negligencia severa",
       "fechaApertura": "2024-08-15",
       "fechaCierre": "2025-01-27",
       "estado": "Resuelto"
     },
     {
-      "id": "9",
+      "id": 9,
       "nombre": "Ricardo Soto",
-      "edad": 7,
+      "edad": "7",
       "caso": "Abandono y maltrato",
       "fechaApertura": "2024-09-01",
       "fechaCierre": "2025-01-28",
       "estado": "En Proceso"
     },
     {
-      "id": "10",
+      "id": 10,
       "nombre": "Isabel Cruz",
-      "edad": 12,
+      "edad": "12",
       "caso": "Violencia física",
       "fechaApertura": "2024-09-20",
       "fechaCierre": "2025-01-31",
       "estado": "Pendiente"
     },
     {
-      "id": "cf93",
+      "id": 11,
       "nombre": "Carlos Guerra",
       "edad": "25",
       "caso": "Negligencia",
@@ -211,7 +265,7 @@
       "estado": "En Proceso"
     },
     {
-      "id": "6d84",
+      "id": 12,
       "nombre": "Carlos Guerra",
       "edad": "25",
       "caso": "Negligencia",
@@ -221,7 +275,7 @@
       "estado": "En Proceso"
     },
     {
-      "id": "45d5",
+      "id": 13,
       "nombre": "Daniel",
       "edad": "12",
       "caso": "Negligencia",
@@ -233,7 +287,7 @@
   ],
   "denuncias": [
     {
-      "id": "1",
+      "id": 1,
       "titulo": "Denuncia 1",
       "fecha": "2023-05-01",
       "denunciante": "Carlos Guerra",
@@ -245,7 +299,7 @@
       "motivo": "Porque si"
     },
     {
-      "id": "2",
+      "id": 2,
       "titulo": "Denuncia 2",
       "fecha": "2023-06-15",
       "denunciante": "Luis Méndez",
@@ -256,7 +310,7 @@
       "email": "luis@gmail.com"
     },
     {
-      "id": "3",
+      "id": 3,
       "titulo": "Denuncia 3",
       "fecha": "2023-07-20",
       "denunciante": "Andrea Salazar",
@@ -265,23 +319,11 @@
       "direccion": "Palmira",
       "telefono": "04141237890",
       "email": "andrea@gmail.com"
-    },
-    {
-      "id": "",
-      "titulo": "",
-      "fecha": "",
-      "denunciante": "",
-      "nombre": "",
-      "cedula": "",
-      "telefono": "",
-      "email": "",
-      "motivo": "",
-      "direccion": ""
     }
   ],
   "reportes": [
     {
-      "id": "1",
+      "id": 1,
       "titulo": "Informe sobre situación de abuso infantil",
       "fecha": "2023-01-10",
       "descripcion": "Informe detallado sobre los casos de abuso infantil en la región y las acciones tomadas.",
@@ -289,7 +331,7 @@
       "estado": "Abierto"
     },
     {
-      "id": "2",
+      "id": 2,
       "titulo": "Reporte de atención a niños en situación de calle",
       "fecha": "2023-02-15",
       "descripcion": "Reporte sobre los esfuerzos de atención y rehabilitación de niños y niñas en situación de calle.",
@@ -297,7 +339,7 @@
       "estado": "Abierto"
     },
     {
-      "id": "3",
+      "id": 3,
       "titulo": "Evaluación de programas educativos para niños vulnerables",
       "fecha": "2023-03-20",
       "descripcion": "Análisis sobre la efectividad de los programas educativos implementados para niños en riesgo.",
@@ -305,7 +347,7 @@
       "estado": "Abierto"
     },
     {
-      "id": "4",
+      "id": 4,
       "titulo": "Reporte sobre la violencia escolar y medidas preventivas",
       "fecha": "2023-04-05",
       "descripcion": "Reporte sobre los incidentes de violencia escolar y las medidas implementadas para prevenir futuros casos.",
@@ -313,7 +355,7 @@
       "estado": "Activo"
     },
     {
-      "id": "5",
+      "id": 5,
       "titulo": "Monitoreo de condiciones de los centros de acogida infantil",
       "fecha": "2023-05-12",
       "descripcion": "Informe sobre las condiciones de los centros de acogida infantil y las mejoras necesarias.",
@@ -321,7 +363,7 @@
       "estado": "Activo"
     },
     {
-      "id": "6",
+      "id": 6,
       "titulo": "Análisis sobre el acceso a servicios de salud para niños y adolescentes",
       "fecha": "2023-06-18",
       "descripcion": "Estudio sobre el acceso y la calidad de los servicios de salud disponibles para niños y adolescentes vulnerables.",
@@ -329,7 +371,7 @@
       "estado": "Activo"
     },
     {
-      "id": "7",
+      "id": 7,
       "titulo": "Reporte de seguimiento a casos de adopción",
       "fecha": "2023-07-22",
       "descripcion": "Informe sobre el estado de los casos de adopción en curso y las familias adoptivas.",
@@ -337,7 +379,7 @@
       "estado": "Activo"
     },
     {
-      "id": "8",
+      "id": 8,
       "titulo": "Evaluación de políticas públicas de protección infantil",
       "fecha": "2023-08-09",
       "descripcion": "Análisis sobre la implementación y efectividad de las políticas públicas dirigidas a la protección de la infancia y adolescencia.",
@@ -347,7 +389,7 @@
   ],
   "promociones": [
     {
-      "id": "1",
+      "id": 1,
       "titulo": "Campaña de Vacunación",
       "descripcion": "Campaña de vacunación para niños y adolescentes",
       "fecha": "2025-01-15",
@@ -358,7 +400,7 @@
       "funcionario": "2"
     },
     {
-      "id": "ce71",
+      "id": 2,
       "titulo": "asdsadsda",
       "descripcion": "asdsdasad",
       "fecha": "1212-12-12",
@@ -369,7 +411,7 @@
       "funcionario": "2"
     },
     {
-      "id": "ea6b",
+      "id": 3,
       "titulo": "Vacunacion",
       "descripcion": "Vacunacion para los menores de 10 años",
       "fecha": "2025-01-31",
@@ -382,7 +424,7 @@
   ],
   "usuarios": [
     {
-      "id": "cc94",
+      "id": 1,
       "username": "guerrita",
       "email": "guerracarlos1309@gmail.com",
       "password": "123"

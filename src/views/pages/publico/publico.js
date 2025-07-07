@@ -60,7 +60,6 @@ const ProtectionSystem = () => {
     descripcion: '',
   })
   const [newDenuncia, setNewDenuncia] = useState({
-    id: '',
     titulo: '',
     fecha: '',
     denunciante: '',
@@ -89,7 +88,6 @@ const ProtectionSystem = () => {
       if (!response.error) {
         setModalVisible(false)
         setNewDenuncia({
-          id: '',
           titulo: '',
           fecha: '',
           denunciante: '',

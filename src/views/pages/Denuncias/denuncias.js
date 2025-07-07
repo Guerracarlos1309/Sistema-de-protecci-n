@@ -29,6 +29,7 @@ const Denuncias = () => {
   const [denuncias, setDenuncias] = useState([])
   const [selectedDenuncia, setSelectedDenuncia] = useState(null)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
+  const [deleteModal, setDeleteModal] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [editForm, setEditForm] = useState({
     titulo: '',
@@ -94,17 +95,27 @@ const Denuncias = () => {
     }
   }
 
-  const handleDelete = (id) => {
-    if (window.confirm('¿Está seguro que desea eliminar esta denuncia?')) {
-      api
-        .delete(`/denuncias/${id}`)
-        .then(() => {
-          setDenuncias((prev) => prev.filter((d) => d.id !== id))
-        })
-        .catch((error) => {
-          console.error('Error deleting complaint:', error)
-        })
-    }
+  const handleDelete = () => {
+    console.log('ID a eliminar:', selectedDenuncia)
+    api
+      .delet('/denuncias', selectedDenuncia.id)
+      .then((response) => {
+        if (!response.error) {
+          loadDenuncias()
+          setDeleteModal(false)
+          setSelectedDenuncia(null)
+        } else {
+          console.error('Error eliminando denuncia:', response)
+        }
+      })
+      .catch((error) => {
+        console.error('Error eliminando denuncia:', error)
+      })
+  }
+
+  const handleDeleteClick = (denuncia) => {
+    setSelectedDenuncia(denuncia)
+    setDeleteModal(true)
   }
 
   return (
@@ -148,7 +159,11 @@ const Denuncias = () => {
                       <CIcon icon={cilZoom} size="sm" className="me-1" />
                       Más Info
                     </CButton>
-                    <CButton color="danger" className="me-1">
+                    <CButton
+                      color="danger"
+                      className="me-1"
+                      onClick={() => handleDeleteClick(denuncia)}
+                    >
                       <CIcon icon={cilXCircle} className="me-1"></CIcon>
                       Eliminar
                     </CButton>
@@ -242,6 +257,21 @@ const Denuncias = () => {
         <CModalFooter>
           <CButton color="danger" className="me-1" onClick={() => setIsInfoModalOpen(false)}>
             Cerrar
+          </CButton>
+        </CModalFooter>
+      </CModal>
+
+      <CModal visible={deleteModal} onClose={() => setDeleteModal(false)}>
+        <CModalHeader>
+          <CModalTitle>Confirmar Eliminación</CModalTitle>
+        </CModalHeader>
+        <CModalBody>¿Estás seguro de que deseas eliminar esta denuncia?</CModalBody>
+        <CModalFooter>
+          <CButton color="secondary" onClick={() => setDeleteModal(false)}>
+            Cancelar
+          </CButton>
+          <CButton color="danger" onClick={handleDelete}>
+            Confirmar
           </CButton>
         </CModalFooter>
       </CModal>

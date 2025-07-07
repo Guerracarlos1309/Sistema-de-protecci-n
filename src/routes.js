@@ -1,3 +1,4 @@
+import path from 'path'
 import { element } from 'prop-types'
 import React from 'react'
 
