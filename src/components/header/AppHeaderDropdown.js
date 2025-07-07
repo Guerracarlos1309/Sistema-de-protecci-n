@@ -20,6 +20,7 @@ import {
   cilSettings,
   cilTask,
   cilUser,
+  cilFindInPage,
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 
@@ -41,6 +42,11 @@ const AppHeaderDropdown = () => {
         <CDropdownItem href="#" onClick={() => navigate('Profile')}>
           <CIcon icon={cilUser} className="me-2" />
           Profile
+        </CDropdownItem>
+
+        <CDropdownItem href="#" onClick={() => navigate('/LandingPage')}>
+          <CIcon icon={cilFindInPage} className="me-2" />
+          Ir a la pagina de inicio
         </CDropdownItem>
 
         <CDropdownDivider />

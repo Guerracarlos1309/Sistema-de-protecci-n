@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import {
   CCard,
@@ -16,6 +18,17 @@ import {
   CFormLabel,
   CContainer,
   CBadge,
+  CNavbar,
+  CNavbarBrand,
+  CNavbarNav,
+  CNavItem,
+  CNavLink,
+  CNavbarToggler,
+  CCollapse,
+  CCardTitle,
+  CCardText,
+  CListGroup,
+  CListGroupItem,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import {
@@ -29,6 +42,11 @@ import {
   cilCalendar,
   cilUser,
   cilCreditCard,
+  cilClock,
+  cilStar,
+  cilHome,
+  cilInfo,
+  cilCamera,
 } from '@coreui/icons'
 import { helpFetch } from '../../../api/helpFetch.js'
 import { useNavigate } from 'react-router-dom'
@@ -36,6 +54,67 @@ import { useNavigate } from 'react-router-dom'
 // Simulated API helper (replace with your actual API)
 const api = helpFetch()
 
+// Header Component
+const Header = ({ onLoginClick }) => {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <CNavbar expand="lg" style={styles.navbar} className="shadow-lg">
+      <CContainer>
+        <CNavbarBrand style={styles.navbarBrand}>
+          <img
+            src="/images/logo.jpg"
+            alt="Logo del Sistema de Protección"
+            style={{ height: '30px', marginRight: '10px' }}
+          />
+        </CNavbarBrand>
+
+        <CNavbarToggler
+          aria-label="Toggle navigation"
+          aria-expanded={visible}
+          onClick={() => setVisible(!visible)}
+        />
+
+        <CCollapse className="navbar-collapse" visible={visible}>
+          <CNavbarNav className="ms-auto">
+            <CNavItem>
+              <CNavLink href="#inicio" style={styles.navLink}>
+                <CIcon icon={cilHome} className="me-1" />
+                Inicio
+              </CNavLink>
+            </CNavItem>
+            <CNavItem>
+              <CNavLink href="#servicios" style={styles.navLink}>
+                <CIcon icon={cilInfo} className="me-1" />
+                Servicios
+              </CNavLink>
+            </CNavItem>
+            <CNavItem>
+              <CNavLink href="#ubicacion" style={styles.navLink}>
+                <CIcon icon={cilLocationPin} className="me-1" />
+                Ubicación
+              </CNavLink>
+            </CNavItem>
+            <CNavItem>
+              <CNavLink href="#galeria" style={styles.navLink}>
+                <CIcon icon={cilCamera} className="me-1" />
+                Galería
+              </CNavLink>
+            </CNavItem>
+            <CNavItem className="ms-2">
+              <CButton color="success" onClick={onLoginClick} style={styles.loginButton}>
+                <CIcon icon={cilUser} className="me-2" />
+                Ir al Login
+              </CButton>
+            </CNavItem>
+          </CNavbarNav>
+        </CCollapse>
+      </CContainer>
+    </CNavbar>
+  )
+}
+
+// Virtual Agent Component
 const VirtualAgent = ({ onAction }) => {
   const [message, setMessage] = useState('¡Hola! ¿En qué puedo ayudarte hoy?')
 
@@ -49,12 +128,6 @@ const VirtualAgent = ({ onAction }) => {
     }
   }
 
-  const navigate = useNavigate()
-
-  const irAlLogin = () => {
-    navigate('/login')
-  }
-
   return (
     <div style={styles.virtualAgent}>
       <div style={styles.avatar}>
@@ -63,11 +136,9 @@ const VirtualAgent = ({ onAction }) => {
         </div>
         <div style={styles.onlineIndicator}></div>
       </div>
-
       <div style={styles.chatBox}>
         <p style={styles.chatMessage}>{message}</p>
       </div>
-
       <div style={styles.actions}>
         <CButton
           color="danger"
@@ -88,24 +159,227 @@ const VirtualAgent = ({ onAction }) => {
           <CIcon icon={cilDescription} className="me-2" />
           Crear Reporte
         </CButton>
-        <CButton
-          color="success"
-          variant="outline"
-          style={styles.secondaryButton}
-          className="shadow-lg"
-          onClick={irAlLogin}
-        >
-          <CIcon icon={cilUser} className="me-2" />
-          Ir al Login
-        </CButton>
       </div>
     </div>
   )
 }
 
+// Location Section Component
+const LocationSection = () => {
+  return (
+    <section id="ubicacion" style={styles.locationSection}>
+      <CContainer>
+        <div style={styles.sectionHeader}>
+          <h2 style={styles.sectionTitle}>Nuestra Ubicación</h2>
+          <p style={styles.sectionDescription}>
+            Estamos aquí para ayudarte. Visítanos en nuestras oficinas o contáctanos por cualquiera
+            de nuestros medios.
+          </p>
+        </div>
+
+        <CRow className="g-4">
+          {/* Contact Information */}
+          <CCol lg="6">
+            <CCard style={styles.locationCard} className="shadow-lg h-100">
+              <CCardHeader style={styles.locationCardHeader}>
+                <h4 style={styles.cardTitle}>
+                  <CIcon icon={cilPhone} className="me-2" />
+                  Información de Contacto
+                </h4>
+              </CCardHeader>
+              <CCardBody>
+                <CListGroup flush>
+                  <CListGroupItem style={styles.contactItem}>
+                    <div style={styles.contactIcon}>
+                      <CIcon icon={cilLocationPin} size="lg" />
+                    </div>
+                    <div>
+                      <h5 style={styles.contactTitle}>Dirección</h5>
+                      <p style={styles.contactText}>Av. Eleuterio Chacon</p>
+                      <p style={styles.contactText}>Lugar: Alcaldia del municipio Andres Bello</p>
+                    </div>
+                  </CListGroupItem>
+
+                  <CListGroupItem style={styles.contactItem}>
+                    <div style={styles.contactIcon}>
+                      <CIcon icon={cilPhone} size="lg" />
+                    </div>
+                    <div>
+                      <h5 style={styles.contactTitle}>Teléfonos</h5>
+                      <p style={styles.contactText}>Principal: +58 (424) 784-2726</p>
+                      <p style={styles.contactText}>Secundario: +58 (212) 987-6513</p>
+                    </div>
+                  </CListGroupItem>
+
+                  <CListGroupItem style={styles.contactItem}>
+                    <div style={styles.contactIcon}>
+                      <CIcon icon={cilEnvelopeClosed} size="lg" />
+                    </div>
+                    <div>
+                      <h5 style={styles.contactTitle}>Correo Electrónico</h5>
+                      <p style={styles.contactText}>Sistema@proteccion.gov.ve</p>
+                      <p style={styles.contactText}>SPAB@proteccion.gov.ve</p>
+                    </div>
+                  </CListGroupItem>
+
+                  <CListGroupItem style={styles.contactItem}>
+                    <div style={styles.contactIcon}>
+                      <CIcon icon={cilClock} size="lg" />
+                    </div>
+                    <div>
+                      <h5 style={styles.contactTitle}>Horarios de Atención</h5>
+                      <p style={styles.contactText}>Lunes a Viernes: 8:00 AM - 2:00 PM</p>
+                    </div>
+                  </CListGroupItem>
+                </CListGroup>
+              </CCardBody>
+            </CCard>
+          </CCol>
+
+          {/* Map Placeholder */}
+          <CCol lg="6">
+            <CCard style={styles.mapCard} className="shadow-lg h-100">
+              <CCardHeader style={styles.mapCardHeader}>
+                <h4 style={styles.cardTitle}>
+                  <CIcon icon={cilLocationPin} className="me-2" />
+                  Ubicación en el Mapa
+                </h4>
+              </CCardHeader>
+              <CCardBody style={{ padding: 0 }}>
+                <div style={styles.mapContainer}>
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1342.789414268411!2d-72.18156610963312!3d7.85613109626305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sve!4v1751908502409!5m2!1ses!2sve"
+                    width="100%"
+                    height="350"
+                    style={{ border: 0, borderRadius: '0 0 8px 8px' }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Ubicación del Sistema de Protección"
+                  ></iframe>
+                  <div style={styles.mapOverlay}>
+                    <CButton
+                      color="primary"
+                      size="sm"
+                      href="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1342.789414268411!2d-72.18156610963312!3d7.85613109626305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sve!4v1751908502409!5m2!1ses!2sve"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <CIcon icon={cilLocationPin} className="me-1" />
+                      Ver en Google Maps
+                    </CButton>
+                  </div>
+                </div>
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+      </CContainer>
+    </section>
+  )
+}
+
+// Gallery Section Component
+const GallerySection = () => {
+  const images = [
+    {
+      id: 1,
+      title: 'Centro de Atención',
+      description: 'Nuestras modernas instalaciones para brindar el mejor servicio',
+      category: 'Instalaciones',
+      color: 'primary',
+      image: '/images/defensoria.jpg',
+    },
+    {
+      id: 2,
+      title: 'Equipo de Trabajo',
+      description: 'Profesionales comprometidos con la protección infantil',
+      category: 'Personal',
+      color: 'success',
+      image: '/images/carrusel.jpg',
+    },
+    {
+      id: 3,
+      title: 'Sala de Reuniones',
+      description: 'Espacios cómodos para atención personalizada y confidencial',
+      category: 'Instalaciones',
+      color: 'info',
+      image: '/images/Reporte.jpg',
+    },
+    {
+      id: 4,
+      title: 'Actividades Educativas',
+      description: 'Programas de prevención y educación comunitaria',
+      category: 'Actividades',
+      color: 'warning',
+      image: '/images/seccion1.jpg',
+    },
+    {
+      id: 5,
+      title: 'Área Infantil',
+      description: 'Espacio seguro y acogedor especialmente diseñado para niños',
+      category: 'Espacios',
+      color: 'danger',
+      image: '/images/imagen2.png',
+    },
+    {
+      id: 6,
+      title: 'Capacitaciones',
+      description: 'Formación continua del personal especializado',
+      category: 'Programas',
+      color: 'secondary',
+      image: '/images/carrusel3.jpeg',
+    },
+  ]
+
+  return (
+    <section id="galeria" style={styles.gallerySection}>
+      <CContainer>
+        <div style={styles.sectionHeader}>
+          <h2 style={styles.sectionTitle}>Galería de Imágenes</h2>
+          <p style={styles.sectionDescription}>
+            Conoce nuestras instalaciones, equipo de trabajo y los programas que desarrollamos para
+            proteger a los niños, niñas y adolescentes.
+          </p>
+        </div>
+
+        <CRow className="g-4">
+          {images.map((image) => (
+            <CCol key={image.id} md="6" lg="4">
+              <CCard style={styles.galleryCard} className="shadow-lg h-100">
+                <div style={styles.galleryImagePlaceholder}>
+                  <img src={image.image} alt={image.title} style={styles.galleryImage} />
+                  <CBadge color={image.color} style={styles.galleryBadge}>
+                    {' '}
+                    {image.category}
+                  </CBadge>
+                </div>
+                <CCardBody>
+                  <CCardTitle style={styles.galleryTitle}>{image.title}</CCardTitle>
+                  <CCardText style={styles.galleryText}>{image.description}</CCardText>
+                  <CButton
+                    color={image.color}
+                    variant="outline"
+                    size="sm"
+                    style={styles.galleryButton}
+                  >
+                    Ver Detalles
+                  </CButton>
+                </CCardBody>
+              </CCard>
+            </CCol>
+          ))}
+        </CRow>
+      </CContainer>
+    </section>
+  )
+}
+
+// Main Protection System Component
 const ProtectionSystem = () => {
   const [action, setAction] = useState(null)
   const [modalVisible, setModalVisible] = useState(false)
+  const [successModalVisible, setSuccessModalVisible] = useState(false)
   const [newDenuncia, setNewDenuncia] = useState({
     titulo: '',
     fecha: '',
@@ -118,6 +392,8 @@ const ProtectionSystem = () => {
     direccion: '',
   })
 
+  const navigate = useNavigate()
+
   const handleAgentAction = (actionType) => {
     setAction(actionType)
     setModalVisible(true)
@@ -128,6 +404,7 @@ const ProtectionSystem = () => {
       const response = await api.post('/denuncias', { body: newDenuncia })
       if (!response.error) {
         setModalVisible(false)
+        setSuccessModalVisible(true) // Mostrar modal de éxito
         setNewDenuncia({
           titulo: '',
           fecha: '',
@@ -153,10 +430,17 @@ const ProtectionSystem = () => {
     })
   }
 
+  const irAlLogin = () => {
+    navigate('/login')
+  }
+
   return (
     <div style={styles.pageContainer}>
+      {/* Header */}
+      <Header onLoginClick={irAlLogin} />
+
       {/* Hero Section */}
-      <section style={styles.heroSection}>
+      <section id="inicio" style={styles.heroSection}>
         <div style={styles.heroOverlay}></div>
         <CContainer style={styles.heroContent}>
           <div style={styles.heroCenter}>
@@ -173,15 +457,15 @@ const ProtectionSystem = () => {
               abusos o situaciones de riesgo
             </p>
             <div style={styles.heroBadges}>
-              <CBadge color="light" style={styles.badge}>
+              <CBadge color="success" style={styles.badge}>
                 <CIcon icon={cilShieldAlt} className="me-1" />
                 Protección 24/7
               </CBadge>
-              <CBadge color="light" style={styles.badge}>
+              <CBadge color="warning" style={styles.badge}>
                 <CIcon icon={cilSpeech} className="me-1" />
                 Asistencia Virtual
               </CBadge>
-              <CBadge color="light" style={styles.badge}>
+              <CBadge color="info" style={styles.badge}>
                 <CIcon icon={cilDescription} className="me-1" />
                 Reportes Seguros
               </CBadge>
@@ -191,7 +475,7 @@ const ProtectionSystem = () => {
       </section>
 
       {/* Main Content */}
-      <section style={styles.mainSection}>
+      <section id="servicios" style={styles.mainSection}>
         <CContainer>
           <CRow className="g-4">
             {/* Information Card */}
@@ -220,7 +504,6 @@ const ProtectionSystem = () => {
                       vulnerables de nuestra sociedad.
                     </p>
                   </div>
-
                   <CRow className="mt-4 g-3">
                     <CCol md="4">
                       <div style={styles.featureCard}>
@@ -249,7 +532,6 @@ const ProtectionSystem = () => {
                 </CCardBody>
               </CCard>
             </CCol>
-
             {/* Virtual Agent Card */}
             <CCol lg="4">
               <CCard style={styles.agentCard} className="shadow-lg">
@@ -267,6 +549,12 @@ const ProtectionSystem = () => {
           </CRow>
         </CContainer>
       </section>
+
+      {/* Location Section */}
+      <LocationSection />
+
+      {/* Gallery Section */}
+      <GallerySection />
 
       {/* Form Modal */}
       <CModal visible={modalVisible} onClose={() => setModalVisible(false)} size="lg">
@@ -302,7 +590,6 @@ const ProtectionSystem = () => {
                   style={styles.formInput}
                 />
               </div>
-
               <div style={styles.formGroup}>
                 <CFormLabel htmlFor="denunciante" style={styles.formLabel}>
                   <CIcon icon={cilUser} className="me-1" />
@@ -317,7 +604,6 @@ const ProtectionSystem = () => {
                   style={styles.formInput}
                 />
               </div>
-
               <div style={styles.formGroup}>
                 <CFormLabel htmlFor="cedula" style={styles.formLabel}>
                   <CIcon icon={cilCreditCard} className="me-1" />
@@ -332,7 +618,6 @@ const ProtectionSystem = () => {
                   style={styles.formInput}
                 />
               </div>
-
               <div style={styles.formGroup}>
                 <CFormLabel htmlFor="motivo" style={styles.formLabel}>
                   <CIcon icon={cilWarning} className="me-1" />
@@ -348,7 +633,6 @@ const ProtectionSystem = () => {
                 />
               </div>
             </CCol>
-
             <CCol md="6">
               <div style={styles.formGroup}>
                 <CFormLabel htmlFor="fecha" style={styles.formLabel}>
@@ -363,7 +647,6 @@ const ProtectionSystem = () => {
                   style={styles.formInput}
                 />
               </div>
-
               <div style={styles.formGroup}>
                 <CFormLabel htmlFor="telefono" style={styles.formLabel}>
                   <CIcon icon={cilPhone} className="me-1" />
@@ -378,7 +661,6 @@ const ProtectionSystem = () => {
                   style={styles.formInput}
                 />
               </div>
-
               <div style={styles.formGroup}>
                 <CFormLabel htmlFor="email" style={styles.formLabel}>
                   <CIcon icon={cilEnvelopeClosed} className="me-1" />
@@ -393,7 +675,6 @@ const ProtectionSystem = () => {
                   style={styles.formInput}
                 />
               </div>
-
               <div style={styles.formGroup}>
                 <CFormLabel htmlFor="direccion" style={styles.formLabel}>
                   <CIcon icon={cilLocationPin} className="me-1" />
@@ -420,18 +701,84 @@ const ProtectionSystem = () => {
           </CButton>
         </CModalFooter>
       </CModal>
+      {/* Success Modal */}
+      <CModal visible={successModalVisible} onClose={() => setSuccessModalVisible(false)} size="md">
+        <CModalHeader closeButton>
+          <CModalTitle style={styles.successModalTitle}>
+            <CIcon icon={cilShieldAlt} className="me-2 text-success" />
+            ¡Denuncia Enviada!
+          </CModalTitle>
+        </CModalHeader>
+        <CModalBody style={styles.successModalBody}>
+          <div style={styles.successContent}>
+            <div style={styles.successIcon}>
+              <CIcon icon={cilShieldAlt} size="4xl" style={{ color: '#28a745' }} />
+            </div>
+            <h4 style={styles.successTitle}>Su denuncia ha sido enviada con éxito</h4>
+            <p style={styles.successMessage}>
+              Hemos recibido su denuncia y la hemos registrado en nuestro sistema. Nuestro equipo
+              especializado revisará la información proporcionada y
+              <strong> lo llamaremos lo antes posible</strong> para darle seguimiento al caso.
+            </p>
+            <div style={styles.successInfo}>
+              <CBadge color="success" style={styles.successBadge}>
+                <CIcon icon={cilClock} className="me-1" />
+                Respuesta en 24-48 horas
+              </CBadge>
+            </div>
+          </div>
+        </CModalBody>
+        <CModalFooter style={styles.successModalFooter}>
+          <CButton
+            color="success"
+            onClick={() => setSuccessModalVisible(false)}
+            style={styles.successButton}
+          >
+            <CIcon icon={cilShieldAlt} className="me-2" />
+            Entendido
+          </CButton>
+        </CModalFooter>
+      </CModal>
     </div>
   )
 }
 
+// Styles
 const styles = {
   pageContainer: {
     minHeight: '100vh',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    background: 'linear-gradient(135deg,rgb(34, 148, 194) 0%,rgb(13, 53, 82) 100%)',
   },
+
+  // Header Styles
+  navbar: {
+    background: 'rgba(255, 255, 255, 0.95)',
+    backdropFilter: 'blur(10px)',
+    borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+    position: 'sticky',
+    top: 0,
+    zIndex: 1000,
+  },
+  navbarBrand: {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    color: '#2563eb',
+  },
+  navLink: {
+    color: '#374151',
+    fontWeight: '500',
+    transition: 'color 0.3s ease',
+  },
+  loginButton: {
+    borderRadius: '25px',
+    fontWeight: 'bold',
+    padding: '8px 20px',
+  },
+
+  // Hero Section
   heroSection: {
     position: 'relative',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    background: 'linear-gradient(135deg, #667eea 0%,rgb(12, 72, 96) 100%)',
     color: 'white',
     padding: '80px 0',
     overflow: 'hidden',
@@ -488,7 +835,10 @@ const styles = {
     background: 'rgba(255, 255, 255, 0.1)',
     backdropFilter: 'blur(10px)',
     border: '1px solid rgba(255, 255, 255, 0.2)',
+    color: 'white',
   },
+
+  // Main Section
   mainSection: {
     padding: '60px 0',
     background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
@@ -499,7 +849,7 @@ const styles = {
     backdropFilter: 'blur(10px)',
   },
   cardHeader: {
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    background: 'linear-gradient(135deg,rgb(27, 107, 226) 0%,rgb(20, 74, 105) 100%)',
     color: 'white',
     border: 'none',
   },
@@ -542,6 +892,8 @@ const styles = {
     color: '#666',
     margin: 0,
   },
+
+  // Agent Card
   agentCard: {
     border: 'none',
     background: 'rgba(255, 255, 255, 0.95)',
@@ -550,7 +902,7 @@ const styles = {
     top: '20px',
   },
   agentHeader: {
-    background: 'linear-gradient(135deg, #10ac84 0%, #667eea 100%)',
+    background: 'linear-gradient(135deg,rgb(205, 200, 40) 0%,rgb(104, 222, 102) 100%)',
     color: 'white',
     border: 'none',
   },
@@ -559,6 +911,8 @@ const styles = {
     fontSize: '1.2rem',
     fontWeight: 'bold',
   },
+
+  // Virtual Agent
   virtualAgent: {
     display: 'flex',
     flexDirection: 'column',
@@ -572,7 +926,7 @@ const styles = {
   avatarCircle: {
     width: '80px',
     height: '80px',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    background: 'linear-gradient(135deg,rgb(43, 139, 184) 0%,rgb(75, 120, 162) 100%)',
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
@@ -623,6 +977,147 @@ const styles = {
     fontWeight: 'bold',
     transition: 'all 0.3s ease',
   },
+
+  // Location Section
+  locationSection: {
+    padding: '60px 0',
+    background: 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
+  },
+  sectionHeader: {
+    textAlign: 'center',
+    marginBottom: '50px',
+  },
+  sectionTitle: {
+    fontSize: '3rem',
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: '20px',
+  },
+  sectionDescription: {
+    fontSize: '1.2rem',
+    color: '#666',
+    maxWidth: '600px',
+    margin: '0 auto',
+    lineHeight: '1.6',
+  },
+  locationCard: {
+    border: 'none',
+    background: 'rgba(255, 255, 255, 0.9)',
+    backdropFilter: 'blur(10px)',
+  },
+  locationCardHeader: {
+    background: 'linear-gradient(135deg, #3b82f6 0%, #1e40af 100%)',
+    color: 'white',
+    border: 'none',
+  },
+  contactItem: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: '15px',
+    padding: '20px',
+    border: 'none',
+    borderBottom: '1px solid #e9ecef',
+  },
+  contactIcon: {
+    color: '#3b82f6',
+    minWidth: '40px',
+  },
+  contactTitle: {
+    fontSize: '1.1rem',
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: '8px',
+  },
+  contactText: {
+    color: '#666',
+    margin: '2px 0',
+  },
+  emergencyText: {
+    color: '#dc3545',
+    fontWeight: 'bold',
+    margin: '2px 0',
+  },
+  mapCard: {
+    border: 'none',
+    background: 'rgba(255, 255, 255, 0.9)',
+    backdropFilter: 'blur(10px)',
+  },
+  mapCardHeader: {
+    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+    color: 'white',
+    border: 'none',
+  },
+  mapContainer: {
+    position: 'relative',
+    height: '350px',
+    overflow: 'hidden',
+  },
+  mapOverlay: {
+    position: 'absolute',
+    bottom: '15px',
+    right: '15px',
+    zIndex: 10,
+  },
+
+  // Gallery Section
+  gallerySection: {
+    padding: '60px 0',
+    background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
+  },
+  galleryCard: {
+    border: 'none',
+    background: 'rgba(255, 255, 255, 0.9)',
+    backdropFilter: 'blur(10px)',
+    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+  },
+  galleryImagePlaceholder: {
+    height: '200px',
+    position: 'relative',
+    overflow: 'hidden',
+    borderRadius: '8px 8px 0 0',
+  },
+  galleryImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    display: 'block',
+  },
+  galleryIcon: {
+    color: '#7c3aed',
+  },
+  galleryBadge: {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+    fontSize: '0.8rem',
+  },
+  galleryTitle: {
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: '10px',
+  },
+  galleryText: {
+    color: '#666',
+    fontSize: '0.9rem',
+    lineHeight: '1.5',
+    marginBottom: '15px',
+  },
+  galleryButton: {
+    borderRadius: '20px',
+    fontSize: '0.8rem',
+  },
+  galleryFooter: {
+    textAlign: 'center',
+    marginTop: '40px',
+  },
+  viewMoreButton: {
+    borderRadius: '25px',
+    padding: '12px 30px',
+    fontWeight: 'bold',
+  },
+
+  // Modal
   modalTitle: {
     fontSize: '1.5rem',
     fontWeight: 'bold',
@@ -644,6 +1139,59 @@ const styles = {
     padding: '12px',
     fontSize: '1rem',
     transition: 'border-color 0.3s ease',
+  },
+
+  // Success Modal Styles
+  successModalTitle: {
+    fontSize: '1.8rem',
+    fontWeight: 'bold',
+    color: '#28a745',
+  },
+  successModalBody: {
+    padding: '30px',
+    textAlign: 'center',
+  },
+  successContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '20px',
+  },
+  successIcon: {
+    padding: '20px',
+    background: 'rgba(40, 167, 69, 0.1)',
+    borderRadius: '50%',
+    marginBottom: '10px',
+  },
+  successTitle: {
+    color: '#333',
+    fontWeight: 'bold',
+    marginBottom: '15px',
+  },
+  successMessage: {
+    fontSize: '1.1rem',
+    color: '#666',
+    lineHeight: '1.6',
+    maxWidth: '400px',
+    margin: '0 auto',
+  },
+  successInfo: {
+    marginTop: '20px',
+  },
+  successBadge: {
+    padding: '10px 20px',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+  },
+  successModalFooter: {
+    justifyContent: 'center',
+    padding: '20px',
+  },
+  successButton: {
+    borderRadius: '25px',
+    padding: '12px 30px',
+    fontWeight: 'bold',
+    fontSize: '1.1rem',
   },
 }
 

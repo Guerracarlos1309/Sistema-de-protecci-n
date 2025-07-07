@@ -309,6 +309,18 @@
       "email": "dani12@sad",
       "motivo": "car",
       "direccion": "tachira"
+    },
+    {
+      "id": "5df4",
+      "titulo": "mataron a danielitoa",
+      "fecha": "2025-07-07",
+      "denunciante": "carlos Guerra",
+      "nombre": "",
+      "cedula": "31419488",
+      "telefono": "04247842726",
+      "email": "dani12@sad",
+      "motivo": "se mato",
+      "direccion": "tachira"
     }
   ],
   "reportes": [
